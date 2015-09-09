@@ -32,6 +32,7 @@ configure = ($compileProvider,
     .useLocalStorage()
     .useMissingTranslationHandlerLog()
     .useSanitizeValueStrategy(null)
+    .determinePreferredLanguage()
 
 configure.$inject = [
     '$compileProvider'
@@ -49,7 +50,8 @@ core.run [
   '$state'
   '$stateParams'
   'dataservice'
-  ($rootScope, $state, $stateParams, dataservice) ->
+  '$translate'
+  ($rootScope, $state, $stateParams, dataservice, $translate) ->
     # It's very handy to add references to $state and $stateParams to the
     # $rootScope so that you can access them from any scope within your
     # applications. For example, <li ng-class="{ active: $state.includes
@@ -60,13 +62,25 @@ core.run [
 
     $rootScope.countries = []
     $rootScope.dimensions = []
-    $rootScope.locale = 'es'
+    $rootScope.locale = $translate.proposedLanguage()
 
-    dataservice.getData().then (response) ->
-      $rootScope.countries = response.data.countries
-      $rootScope.dimensions = response.data.dimensions
-      $rootScope.locale = response.data.locale
-      $rootScope.$broadcast 'data-loaded'
+    refreshData = (locale)->
+      locale or= $translate.use() or $translate.proposedLanguage()
+
+      document.documentElement.setAttribute('lang', locale)
+      dataservice.getData(locale).then (response) ->
+        $rootScope.countries = response.data.countries
+        $rootScope.dimensions = response.data.dimensions
+        $rootScope.locale = locale
+        $rootScope.$broadcast 'data-loaded'
+
+
+    $rootScope.$on '$translateChangeStart', (event, data) =>
+      refreshData(data.language)
+
+
+    refreshData()
+
 
 ]
 

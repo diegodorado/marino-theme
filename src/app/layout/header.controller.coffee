@@ -1,27 +1,11 @@
 ### @ngInject ###
-Header = ($state, routerHelper, $http, $window, $scope , $translate) ->
+Header = ($window, $scope , $translate) ->
   vm = this
   @langOpened = false
 
   @changeLocale = (locale) ->
-    $translate.fallbackLanguage('en')
     $translate.use(locale)
-    return
-
-    $http.get('/api/locale/' + locale)
-      .success(successCallback)
-      .error errorCallback
-    return
-
-  successCallback = (arg) ->
-    $window.location.reload()
-    return
-
-  errorCallback = (arg) ->
-    console.log 'error setting locale'
-    return
-
-
+    @toggleMenu()
 
   @toggleMenu = (event) ->
     @langOpened = not @langOpened
@@ -29,8 +13,8 @@ Header = ($state, routerHelper, $http, $window, $scope , $translate) ->
     # Stopping event propagation means window.onclick
     # won't get called when someone clicks
     # on the menu div. Without this, menu will be hidden immediately
-    event.stopPropagation()
-
+    if event?
+      event.stopPropagation()
 
   $window.onclick = () ->
     if vm.langOpened
@@ -43,9 +27,6 @@ Header = ($state, routerHelper, $http, $window, $scope , $translate) ->
 
 angular.module('app.layout').controller 'Header', Header
 Header.$inject = [
-  '$state'
-  'routerHelper'
-  '$http'
   '$window'
   '$scope'
   '$translate'

@@ -1,4 +1,4 @@
-Dashboard = ($state, dataservice, logger, $rootScope, $scope, $window, ready) ->
+Dashboard = (logger, $scope, $window) ->
   vm = this
 
   @loadChart = ->
@@ -138,14 +138,35 @@ Dashboard = ($state, dataservice, logger, $rootScope, $scope, $window, ready) ->
 
   $scope.$on 'data-loaded', (event, args) =>
     @loadChart()
+    ids = (c.id for c in @selected_countries)
+    @selected_countries = []
+    for id in ids
+      c = (c for c in $scope.countries when c.id is id)[0]
+      @selected_countries.push c
+      if c.id is @last_selected_country.id
+        @last_selected_country = c
+
+
+
+
+  $scope.handleDrop = (itemId, binId) =>
+    itemId = itemId.replace('country-','')
+    binId = binId.replace('country-','')
+
+    item = (c for c in @selected_countries when c.id is itemId)[0]
+    bin = (c for c in @selected_countries when c.id is binId)[0]
+
+    itemIndex = @selected_countries.indexOf(item)
+    binIndex = @selected_countries.indexOf(bin)
+
+    @selected_countries[itemIndex] = bin
+    @selected_countries[binIndex] = item
+
 
   return
 
 Dashboard.$inject = [
-  '$state'
-  'dataservice'
   'logger'
-  '$rootScope'
   '$scope'
   '$window'
 ]

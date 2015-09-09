@@ -287,7 +287,10 @@ function startBrowserSync(isDev) {
     }
 
     var options = {
-        proxy: 'ciberseguridad.dev',
+        //proxy: 'ciberseguridad.dev',
+        server: {
+            baseDir: "./"
+        },
         port: 3000,
         files: isDev ? [
             config.temp + '**/*.js',

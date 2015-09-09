@@ -32,7 +32,7 @@
   <div class="map">
     <div class="eq" ng-class="{ghost: vm.last_selected_country === null}">
       <span class="country-name">{{vm.last_selected_country.name || ('pais' | translate)}}</span>
-      <div ng-repeat="dimension in vm.dimensions" class="dimension dim-{{dimension.id}}">
+      <div ng-repeat="dimension in dimensions" class="dimension dim-{{dimension.id}}">
         <span>{{ dimension.title }}</span>
         <div ng-repeat="factor in dimension.factors" class="factor">
           <div class="indicators">
@@ -51,7 +51,7 @@
 
 <section class="graph">
   <header class="countries">
-    <div ng-repeat="country in vm.selected_countries" class="country-header" ng-class="{'last-selected':(vm.last_selected_country == country)}">
+    <div ng-repeat="country in vm.selected_countries" id="country-{{country.id}}" draggable droppable drop="handleDrop" class="country-header" ng-class="{'last-selected':(vm.last_selected_country == country)}">
       <a class="close" ng-click="vm.toggleCountry(country,$event)"></a>
       <b class="flag-{{country.code}}"></b>
       <span class="country-name">{{country.name}}</span>
@@ -64,7 +64,7 @@
         <li class="select-none" >
           <span ng-click="vm.deselectAllCountries($event)" translate>deseleccionar.todos</span>
         </li>
-        <li ng-repeat="country in vm.countries" ng-class="{'selected':(vm.selected_countries.indexOf(country) > -1), 'last-selected':(vm.last_selected_country == country)}" >
+        <li ng-repeat="country in countries" ng-class="{'selected':(vm.selected_countries.indexOf(country) > -1), 'last-selected':(vm.last_selected_country == country)}" >
           <span ng-click="vm.toggleCountryHeader(country,$event)">{{country.name}}</span>
         </li>
       </ul>

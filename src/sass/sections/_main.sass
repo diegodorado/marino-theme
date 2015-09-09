@@ -77,6 +77,28 @@ section.main
 
 
 /* ---singles----- */
+header.countries
+  .country-header
+    cursor: move
+
+.drag
+  background: #efefef
+  opacity: 0.5
+
+.over
+  background: #efefef
+  position: relative
+  &::after
+    position: absolute
+    top: 134px
+    left: 0
+    display: block
+    content: " "
+    width: 99%
+    height: 9999px
+    opacity: 0.5
+    border-left: 1px dotted grey
+    border-right: 1px dotted grey
 
 .eq
   &.ghost
