@@ -1,0 +1,6 @@
+name: Ciberseguridad
+description: Ciberseguridad OctoberCMS theme.
+author: Diego Dorado
+homepage: 'http://octobercms.com'
+require:
+    - Fourmi.Cibersecurity

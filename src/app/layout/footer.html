@@ -1,0 +1,19 @@
+<footer ng-controller="Footer as vm">
+  <a href="#" id="go-to-top"></a>
+  <div class="isologo">
+    <a href="/">
+      <span translate>observatorio.de.la</span>
+      <strong translate>ciberseguridad</strong>
+      <span translate>en.america.latina.y.el.caribe</span>
+    </a>
+  </div>
+
+  <nav>
+    <a translate ui-sref="about({ locale: locale })">acerca.de</a>
+    <a translate ui-sref="contributors({ locale: locale })">contribuidores</a>
+    <a translate ui-sref="institutional-information({ locale: locale })">informacion.institucional</a>
+    <a translate ui-sref="contact({ locale: locale })">contacto</a>
+  </nav>
+  <p class="copy" translate="copyright" translate-values="{ year: vm.year }"></p>
+
+</footer>

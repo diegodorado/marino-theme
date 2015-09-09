@@ -1,0 +1,169 @@
+<section class="main">
+  <div class="aside">
+    <p class="lead">
+      <span translate>este.sitio.permite.conocer.el</span>
+      <a translate href="#">grado.de.madurez</a>
+      <span translate>de.cada.pais.en.terminos.de.ciberseguridad</span>
+      <span translate>boreceror.solupta</span>
+    </p>
+    <div class="select">
+      <button>
+        <span ng-click="vm.toggleCountrySelect($event)" translate>selecciona.un.pais</span>
+        <ul ng-show="vm.countrySelectOpened" class="select-country">
+          <li class="select-none" >
+            <span ng-click="vm.deselectAllCountries($event)"  translate>deseleccionar.todos</span>
+          </li>
+          <li ng-repeat="country in countries" ng-class="{'selected':(vm.selected_countries.indexOf(country) > -1), 'last-selected':(vm.last_selected_country == country)}" >
+            <span ng-click="vm.toggleCountry(country,$event)">{{country.name}}</span>
+          </li>
+        </ul>
+      </button>
+    </div>
+
+    <div class="info" ng-class="{empty: vm.last_selected_country === null}">
+      <h3>{{vm.last_selected_country.name || ('pais.seleccionado' | translate)}}</h3>
+      <p>
+        {{vm.last_selected_country.excerpt || ('enterate.de.la.situacion' | translate)}}
+        <a href="#" ng-show="vm.last_selected_country">Leer más >></a>
+      </p>
+    </div>
+  </div>
+
+  <div class="map">
+    <div class="eq" ng-class="{ghost: vm.last_selected_country === null}">
+      <span class="country-name">{{vm.last_selected_country.name || ('pais' | translate)}}</span>
+      <div ng-repeat="dimension in vm.dimensions" class="dimension dim-{{dimension.id}}">
+        <span>{{ dimension.title }}</span>
+        <div ng-repeat="factor in dimension.factors" class="factor">
+          <div class="indicators">
+            <div ng-repeat="indicator in factor.indicators" class="indicator">
+              <div class="country-ml" ng-class="'ml-'+(vm.last_selected_country.maturity_levels[indicator.id]||0)">
+                <i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="geochart" google-chart ng-style="vm.chartStyle" chart="vm.chart" on-select="vm.chartOnSelect(chartWrapper)"></div>
+  </div>
+</section>
+
+<section class="graph">
+  <header class="countries">
+    <div ng-repeat="country in vm.selected_countries" class="country-header" ng-class="{'last-selected':(vm.last_selected_country == country)}">
+      <a class="close" ng-click="vm.toggleCountry(country,$event)"></a>
+      <b class="flag-{{country.code}}"></b>
+      <span class="country-name">{{country.name}}</span>
+      <a class="info-link" href="#"></a>
+    </div>
+    <div ng-show="vm.selected_countries.length<5" class="country-header ghost" ng-click="vm.toggleCountryHeaderSelect($event)">
+      <span class="hint" translate>selecciona.un.pais.para.comparar</span>
+      <i></i>
+      <ul ng-show="vm.countrySelectHeaderOpened" class="select-country">
+        <li class="select-none" >
+          <span ng-click="vm.deselectAllCountries($event)" translate>deseleccionar.todos</span>
+        </li>
+        <li ng-repeat="country in vm.countries" ng-class="{'selected':(vm.selected_countries.indexOf(country) > -1), 'last-selected':(vm.last_selected_country == country)}" >
+          <span ng-click="vm.toggleCountryHeader(country,$event)">{{country.name}}</span>
+        </li>
+      </ul>
+    </div>
+  </header>
+  <div class="graph-data">
+    <div ng-repeat="dimension in dimensions" class="dimension dim-{{dimension.id}}">
+      <h3>
+        <span>{{ dimension.title }}</span>
+      </h3>
+      <div class="factors">
+        <div ng-repeat="factor in dimension.factors" class="factor">
+          <h4>{{factor.title}}</h4>
+          <div class="indicators">
+            <div ng-repeat="indicator in factor.indicators" class="indicator">
+              <h5>{{indicator.title}}</h5>
+              <div ng-repeat="country in vm.selected_countries" class="country-ml" ng-class="'ml-'+(country.maturity_levels[indicator.id])">
+                <i></i><i></i><i></i><i></i><i></i>
+              </div>
+              <div ng-show="vm.selected_countries.length<5" class="country-ml ghost">
+                <i></i><i></i><i></i><i></i><i></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats">
+  <div class="stats-inner">
+    <header class="countries">
+      <div ng-repeat="country in vm.selected_countries" class="country-header" ng-class="{'last-selected':(vm.last_selected_country == country)}">
+        <b class="flag-{{country.code}}"></b>
+        <span class="country-name">{{country.name}}</span>
+      </div>
+      <div ng-show="vm.selected_countries.length===0" class="country-header ghost">
+        <span class="hint" translate>pais.seleccionado</span>
+      </div>
+    </header>
+
+    <div class="population stat-row">
+      <div class="title" translate>poblacion.total</div>
+      <div class="data">
+        <div ng-repeat="country in vm.selected_countries" class="cell">
+          {{country.population | number:0}}
+        </div>
+        <div ng-show="vm.selected_countries.length===0" class="cell ghost">
+          00.000.000
+        </div>
+      </div>
+    </div>
+
+    <div class="internet stat-row">
+      <div class="title" translate>con.acceso.a.internet</div>
+      <div class="data">
+        <div ng-repeat="country in vm.selected_countries" class="cell">
+          {{country.people_with_internet | number:0}}
+        </div>
+        <div ng-show="vm.selected_countries.length===0" class="cell ghost">
+          00.000.000
+        </div>
+      </div>
+    </div>
+
+    <div class="phone stat-row">
+      <div class="title" translate>con.acceso.a.internet.movil</div>
+      <div class="data">
+        <div ng-repeat="country in vm.selected_countries" class="cell">
+          {{country.people_with_mobile_phone | number:0}}
+        </div>
+        <div ng-show="vm.selected_countries.length===0" class="cell ghost">
+          00.000.000
+        </div>
+      </div>
+    </div>
+
+    <div class="computer stat-row">
+      <div class="title" translate>con.computador</div>
+      <div class="data">
+        <div ng-repeat="country in vm.selected_countries" class="cell">
+          {{country.people_with_broadband | number:0}}
+        </div>
+        <div ng-show="vm.selected_countries.length===0" class="cell ghost">
+          00.000.000
+        </div>
+      </div>
+    </div>
+
+    <div class="chart">
+      <div ng-repeat="country in vm.selected_countries" class="country-stats">
+        <i class="population" ng-style="{ 'height' : vm.statsChartHeight(country.population)+'%'}"></i>
+        <i class="internet" ng-style="{ 'height' : vm.statsChartHeight(country.people_with_internet)+'%'}"></i>
+        <i class="phone" ng-style="{ 'height' : vm.statsChartHeight(country.people_with_mobile_phone)+'%'}"></i>
+        <i class="computer" ng-style="{ 'height' : vm.statsChartHeight(country.people_with_broadband)+'%'}"></i>
+      </div>
+    </div>
+
+  </div>
+
+</section>

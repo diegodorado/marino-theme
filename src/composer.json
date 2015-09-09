@@ -1,0 +1,16 @@
+{
+    "name": "diegodorado/ciberseguridad-theme",
+    "type": "october-theme",
+    "description": "Ciberseguridad OctoberCMS theme",
+    "keywords": ["october", "cms", "ciberseguridad", "theme"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Diego Dorado",
+            "email": "diegodorado@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4"
+    }
+}

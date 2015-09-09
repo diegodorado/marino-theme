@@ -1,0 +1,184 @@
+
+section.main
+  //background: $white
+  .aside
+    padding-top: 90px
+    padding-bottom: 10px
+
+    .lead, .select, .info
+      margin-left: 70px
+
+    p
+      color: $grey_dark
+      font-size: 20px
+      line-height: 30px
+    a
+      text-decoration: none
+      font-weight: bold
+      color: $grey_dark
+      &:hover
+        color: $black
+
+    .lead
+      margin-top: 0
+      margin-bottom: 46px
+
+    .info
+      background: inline-image("info.png") no-repeat right 2px top 19px
+      border-top: 1px solid $grey_light
+      margin-top: 49px
+      padding-top: 60px
+      h3
+        color: $grey_dark
+        text-transform: uppercase
+        font-size: 22px
+        font-weight: normal
+        letter-spacing: 1.3px
+        padding: 0
+        margin: 0
+      p
+        margin-top: 3px
+      &.empty
+        +opacity(0.25)
+
+  .map
+    border-left: 1px solid $grey_light
+    border-bottom: 1px solid $grey_light
+    height: 740px
+    overflow: hidden
+    position: relative
+
+  .select-country
+    width: 100%
+    top: 59px
+    li
+      &.select-none span
+        padding-bottom: 11px
+      &.last-selected span
+        border-left: 6px solid $grey_mid
+        border-right: 6px solid $grey_mid
+        background-position: 6px center
+        padding: 0 32px 0
+
+
+section.main
+  +container
+
+  +breakpoint($large)
+    .aside
+      +span(isolate 1 at 1 of (4 5) (40px 6px))
+    .map
+      +span(isolate 1 at 2 of (4 5) (40px 6px))
+  +breakpoint($wide)
+    .aside
+      +span(isolate 1 at 1 of (4 5) (40px 6px))
+    .map
+      +span(isolate 1 at 2 of (4 5) (40px 6px))
+
+
+/* ---singles----- */
+
+.eq
+  &.ghost
+    .country-name
+      color: $grey_light
+
+  margin: 79px 0 0 20px
+  .country-name
+    display: block
+    margin-bottom: 19px
+    letter-spacing: 0.7px
+    text-transform: uppercase
+  .dimension
+    margin-bottom: 14px
+    span
+      display: block
+      margin-bottom: 3px
+  .country-ml
+    margin-top: 2px
+
+
+#geochart
+  position: absolute
+  path
+    cursor: pointer
+  path[fill="none"]
+    display: none
+
+
+.select
+  button
+    position: relative
+    text-align: left
+    background: inline-image("caret2.png") no-repeat 94% 50%
+    border: 1px solid $grey_light
+    width: 100%
+    padding: 0
+    height: 60px
+    &:focus
+      outline: 0
+    span
+      display: block
+      font-size: 21px
+      padding-left: 30px
+      color: $grey_dark
+    > span
+      height: 60px
+      line-height: 60px
+
+.select-country
+  background-color: $grey_lighter
+  position: absolute
+  padding: 0 0 10px
+  list-style: none
+  z-index: 1000
+  margin: 0
+  left: 0
+  li
+    &.select-none
+      span
+        text-transform: none
+        letter-spacing: 1px
+        border-bottom: 1px solid $white
+        line-height: 60px
+    &.selected
+      span
+        background: $grey_light inline-image("check.png") no-repeat 12px center
+    &:hover span, &.selected:hover span
+      background-color: $grey_light
+    span
+      display: block
+      color: $grey_mid
+      text-transform: uppercase
+      padding: 0 38px 0
+      font-size: 15px
+      line-height: 36px
+      letter-spacing: 0.3px
+
+
+
+header.countries
+  +container
+  +pre(4 of 9)
+  +break
+  .country-header
+    +span(1 of 5)
+    &:nth-child(5)
+      +span(1 of 5 last)
+
+    text-align: center
+    b
+      display: inline-block
+    span.country-name
+      display: block
+      text-transform: uppercase
+      margin-top: 3px
+      font-size: 12px
+      height: 35px
+  .ghost
+    +no-select
+    span.hint
+      color: $grey_mid
+      display: block
+      font-size: 12px
+      height: 35px

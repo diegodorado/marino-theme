@@ -1,0 +1,14 @@
+# Ignore Node & Bower
+###################
+node_modules
+bower_components
+build
+.tmp
+.sass-cache
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db

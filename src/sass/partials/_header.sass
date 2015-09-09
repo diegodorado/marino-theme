@@ -1,0 +1,156 @@
+#header
+  background: $white
+  text-transform: uppercase
+  header
+    border-bottom: 1px solid $grey_light
+    position: relative
+    padding: 85px 19px 15px
+  a, a:hover
+    text-decoration: none
+
+  //HiFi logos
+  @each $breakpoint in $breakpoints
+    $res: ($breakpoint / 1px)
+    +breakpoint($breakpoint)
+      .partners
+        .oea
+          +hd_logo("logos/oea-#{$res}-2x.png")
+        .bid
+          +hd_logo("logos/bid-#{$res}-2x.png")
+
+
+  .isologo
+    span
+      font-size: 14px
+      line-height: 13px
+      letter-spacing: 1.0px
+    strong
+      letter-spacing: 0.3px
+      font-size: 29px
+  .lang
+    position: absolute
+    z-index: 1000
+    right: 0
+    top: 8px
+    > a
+      border-left: 1px solid $grey_light
+      display: block
+      padding: 8px 0 18px
+      width: 69px
+      color: $grey_mid
+      font-size: 15px
+      letter-spacing: 0.6px
+      background: inline-image("caret.png") no-repeat 37px 33px
+    .sm
+      margin-left: 19px
+    .md
+      display: none
+
+    ul
+      +no-bullets
+      top: 60px
+      position: absolute
+      background: $grey_lighter
+      right: 9px
+      margin: 0
+      padding: 0
+      +top-triangle($grey_lighter, 16px, 10px)
+
+
+      li:first-child a
+        padding-top: 14px
+        padding-bottom: 4px
+      li:last-child a
+        padding-top: 5px
+        padding-bottom: 15px
+      a
+        color: $grey_mid
+        font-size: 12px
+        line-height: 12px
+        display: block
+        letter-spacing: 1.2px
+        text-align: center
+        padding-left: 32px
+        padding-right: 20px
+        &.active
+          color: $black
+        &:hover
+          color: $black
+          background: $grey_light
+
+
+  .partners
+    position: absolute
+    top: 11px
+    left: 19px
+    a
+      display: inline-block
+    .bid
+      margin-left: 5px
+
+  +breakpoint($medium)
+    header
+      +container
+      padding: 29px 35px 14px
+
+    .isologo
+      float: left
+      span
+        font-size: 18px
+        line-height: 16px
+        letter-spacing: 0.9px
+      strong
+        font-size: 36px
+    .lang
+      top: 62px
+      > a
+        padding: 9px 0 18px
+        width: 85px
+        background-position: 38px 34px
+
+    .partners
+      top: 0
+      left: 0
+      position: relative
+      float: left
+      margin: 32px 0 0 35px
+      .bid
+        margin-left: 8px
+
+  +breakpoint($large)
+    header
+      padding: 29px 0 19px 37px
+    .isologo
+      strong
+        letter-spacing: 0.2px
+        line-height: 41px
+    .lang
+      top: 0
+      left: 0
+      position: relative
+      float: left
+      margin: 24px 0 0 101px
+
+      > a
+        border: none
+        font-size: 13px
+        letter-spacing: 1px
+        background-position: 66px 14px
+      .sm
+        display: none
+      .md
+        display: block
+
+    .partners
+      margin: 4px 0 0 42px
+      .bid
+        margin-left: 10px
+
+  +breakpoint($wide)
+    header
+      padding: 29px 0 18px 36px
+    .lang
+      margin: 24px 0 0 385px
+      ul
+        top: 38px
+        right: -5px
