@@ -227,7 +227,12 @@ gulp.task('optimize', gulp.series('build', function() {
 }));
 
 gulp.task('serve-dev', gulp.series('build', 'cssfix', function() {
-  startBrowserSync(true);
+  startBrowserSync(true, false);
+}));
+
+
+gulp.task('serve-dev2', gulp.series('build', 'cssfix', function() {
+  startBrowserSync(true, true);
 }));
 
 gulp.task('bump', function() {
@@ -259,7 +264,7 @@ function copyImages(isDev) {
 }
 
 
-function startBrowserSync(isDev) {
+function startBrowserSync(isDev, server) {
     if (args.nosync || browserSync.active) {
         return;
     }
@@ -287,10 +292,6 @@ function startBrowserSync(isDev) {
     }
 
     var options = {
-        //proxy: 'ciberseguridad.dev',
-        server: {
-            baseDir: "./"
-        },
         port: 3000,
         files: isDev ? [
             config.temp + '**/*.js',
@@ -307,6 +308,14 @@ function startBrowserSync(isDev) {
         notify: true,
         reloadDelay: 1000
     };
+    
+    if(server){
+      options['server'] = {baseDir: './'};
+    }else{
+      options['proxy'] = 'ciberseguridad.dev';
+    }
+
+
     browserSync(options);
 }
 

@@ -70,6 +70,9 @@ Dashboard = (logger, $scope, $window) ->
     @toggleCountry(country, event)
 
   @toggleCountry = (country, event) ->
+    @countrySelectOpened = false
+
+
     if event?
       event.stopPropagation()
 
@@ -153,8 +156,8 @@ Dashboard = (logger, $scope, $window) ->
     itemId = itemId.replace('country-','')
     binId = binId.replace('country-','')
 
-    item = (c for c in @selected_countries when c.id is itemId)[0]
-    bin = (c for c in @selected_countries when c.id is binId)[0]
+    item = (c for c in @selected_countries when c.id.toString() is itemId)[0]
+    bin = (c for c in @selected_countries when c.id.toString() is binId)[0]
 
     itemIndex = @selected_countries.indexOf(item)
     binIndex = @selected_countries.indexOf(bin)
