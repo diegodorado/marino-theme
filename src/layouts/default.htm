@@ -49,9 +49,13 @@ description = "Default layout"
       <div class="container" ng-include="'app/layout/footer.html'"></div>
     </div>
 
+    <div ui-view="modal" autoscroll="false"></div>
+
     <!-- build:js ../assets/js/lib.js -->
     <!-- bower:js -->
     <!-- endbower -->
+    <script src="/bower_components/messageformat/locale/es.js"></script>
+    <script src="/bower_components/messageformat/locale/en.js"></script>
     <!-- endbuild -->
 
     <!-- build:js ../assets/js/app.js -->

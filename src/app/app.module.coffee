@@ -3,4 +3,5 @@ angular.module 'app', [
     'app.dashboard'
     'app.map'
     'app.layout'
+    'app.overlays'
 ]

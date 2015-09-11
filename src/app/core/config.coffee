@@ -27,12 +27,14 @@ configure = ($compileProvider,
       prefix: themeUrl + '/assets/lang/',
       suffix: '.json'
     })  #.useUrlLoader('/api/messages')
+    .useMessageFormatInterpolation()
     .preferredLanguage('es')
     .fallbackLanguage('es')
     .useLocalStorage()
     .useMissingTranslationHandlerLog()
     .useSanitizeValueStrategy(null)
     .determinePreferredLanguage()
+
 
 configure.$inject = [
     '$compileProvider'
@@ -63,15 +65,15 @@ core.run [
     $rootScope.countries = []
     $rootScope.dimensions = []
     $rootScope.locale = $translate.proposedLanguage()
+    $translate.use($translate.proposedLanguage())
 
     refreshData = (locale)->
       locale or= $translate.use() or $translate.proposedLanguage()
-
+      $rootScope.locale = locale
       document.documentElement.setAttribute('lang', locale)
       dataservice.getData(locale).then (response) ->
         $rootScope.countries = response.data.countries
         $rootScope.dimensions = response.data.dimensions
-        $rootScope.locale = locale
         $rootScope.$broadcast 'data-loaded'
 
 

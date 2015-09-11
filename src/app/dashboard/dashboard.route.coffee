@@ -16,42 +16,30 @@ getStates = ->
     {
       state: 'about'
       config:
-        params: { locale: {} },
-        url: '/about'
+        url: '/:locale/about'
         templateUrl: ($stateParams) ->
           return '/about-' + $stateParams.locale + '.html'
         title: 'about'
     }
 
     {
-      state: 'countributors'
+      state: 'contributors'
       config:
-        params: { locale: {} },
-        url: '/countributors'
+        url: '/:locale/contributors'
         templateUrl: ($stateParams) ->
-          return '/countributors-' + $stateParams.locale + '.html'
-        title: 'countributors'
+          return '/contributors-' + $stateParams.locale + '.html'
+        title: 'contributors'
     }
 
     {
       state: 'institutional-information'
       config:
-        params: { locale: {} },
-        url: '/institutional-information'
+        url: '/:locale/institutional-information'
         templateUrl: ($stateParams) ->
           return '/institutional-information-' + $stateParams.locale + '.html'
         title: 'institutional-information'
     }
 
-    {
-      state: 'contact'
-      config:
-        params: { locale: {} },
-        url: '/contact'
-        templateUrl: ($stateParams) ->
-          return '/contact-' + $stateParams.locale + '.html'
-        title: 'contact'
-    }
 
   ]
 

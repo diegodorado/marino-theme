@@ -3,7 +3,7 @@
     "grado.de.madurez": "grado de madurez",
     "de.cada.pais.en.terminos.de.ciberseguridad": "de cada país en términos de ciberseguridad.",
     "boreceror.solupta": "Boreceror solupta tecestis dolor ape prat alit magnim volupti doluptaqui autem  ea quia  di bersper orereius. Maximet quindunt, as quia quis volum rem cum velestrum consed magnis ium volut evendisto voluptur re, ipientium ditatempor adic tem.",
-    "selecciona.un.pais": "Selecciona un país",
+    "selecciona.un.pais": "{selected, select, true{Selecciona un país} other{Compara otro país}}",
     "deseleccionar.todos": "Deseleccionar todos",
     "selecciona.un.pais.para.comparar": "Selecciona un pais para comparar",
     "pais.seleccionado": "País seleccionado",

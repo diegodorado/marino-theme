@@ -2,13 +2,13 @@
   <div class="aside">
     <p class="lead">
       <span translate>este.sitio.permite.conocer.el</span>
-      <a translate href="#">grado.de.madurez</a>
+      <a translate ui-sref="modal.maturity-levels">grado.de.madurez</a>
       <span translate>de.cada.pais.en.terminos.de.ciberseguridad</span>
       <span translate>boreceror.solupta</span>
     </p>
     <div class="select">
       <button>
-        <span ng-click="vm.toggleCountrySelect($event)" translate>selecciona.un.pais</span>
+        <span ng-click="vm.toggleCountrySelect($event)" translate translate-values="{selected: vm.last_selected_country === null}">selecciona.un.pais</span>
         <ul ng-show="vm.countrySelectOpened" class="select-country">
           <li class="select-none" >
             <span ng-click="vm.deselectAllCountries($event)"  translate>deseleccionar.todos</span>
@@ -24,7 +24,8 @@
       <h3>{{vm.last_selected_country.name || ('pais.seleccionado' | translate)}}</h3>
       <p>
         {{vm.last_selected_country.excerpt || ('enterate.de.la.situacion' | translate)}}
-        <a href="#" ng-show="vm.last_selected_country">Leer más >></a>
+        <br/>
+        <a ui-sref="modal.country-details({code: vm.last_selected_country.code})" ng-show="vm.last_selected_country" >Leer más >></a>
       </p>
     </div>
   </div>
@@ -45,7 +46,7 @@
         </div>
       </div>
     </div>
-    <div id="geochart" google-chart ng-style="vm.chartStyle" chart="vm.chart" on-select="vm.chartOnSelect(chartWrapper)"></div>
+    <div id="geochart" google-chart ng-style="vm.chartStyle" chart="vm.chart" on-ready="vm.chartOnReady(chartWrapper)" on-select="vm.chartOnSelect(selectedItem)"></div>
   </div>
 </section>
 
@@ -84,7 +85,7 @@
               <div ng-repeat="country in vm.selected_countries" class="country-ml" ng-class="'ml-'+(country.maturity_levels[indicator.id])">
                 <i></i><i></i><i></i><i></i><i></i>
               </div>
-              <div ng-show="vm.selected_countries.length<5" class="country-ml ghost">
+              <div class="country-ml ghost">
                 <i></i><i></i><i></i><i></i><i></i>
               </div>
             </div>

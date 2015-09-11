@@ -44,14 +44,13 @@ Dashboard = (logger, $scope, $window) ->
   @getEqLevel= (country, indicator_id)->
     if country? then country.maturity_levels[indicator_id] else 5
 
+  @chartOnReady = (chartWrapper) =>
+    @chartWrapper = chartWrapper
 
-
-  @chartOnSelect = (chartWrapper) =>
-    dt = chartWrapper.getDataTable()
-    selection = chartWrapper.getChart().getSelection()[0]
-
-    if selection?
-      code = dt.getValue(selection.row,0)
+  @chartOnSelect = (selectedItem) =>
+    dt = @chartWrapper.getDataTable()
+    if selectedItem?
+      code = dt.getValue(selectedItem.row,0)
       country = (c for c in $scope.countries when c.code is code)[0]
       @toggleCountry country
     else
@@ -129,7 +128,7 @@ Dashboard = (logger, $scope, $window) ->
       # so that it can refresh the UI
       $scope.$apply()
 
-
+  @chartWrapper = null
   @countrySelectOpened = false
   @countrySelectHeaderOpened = false
   @last_selected_country = null
