@@ -7,10 +7,11 @@
   background: #fff
   z-index: 2001
   opacity: 0.9
+  display: none
 
 .modal-holder
   position: absolute
-  top: 0
+  top: 40px //0
   left: 0
   right: 0
   bottom: 0
@@ -48,7 +49,97 @@
 
 
 .overlay-contact
-  background: image-url("contact.png")
-  width:  image-width("contact.png")
-  height:  image-height("contact.png")
+  background: $white
+  border: 1px solid $grey_mid
   margin: 0 auto
+  padding: 42px
+
+  .container
+    position: relative
+    +show-grid( $large 12 overlay show )
+    +container($large 12)
+    .left
+      +span(5 of 12)
+    .right
+      +span(7 of 12 last)
+
+  .organization
+    margin-bottom: 42px
+
+  h3, h4
+    margin: 0
+
+  h3
+    font-weight: normal
+    color: $grey_dark
+    font-size: 24px
+    font-weight: normal
+    line-height: 16px
+    margin-bottom: 28px
+
+  h4
+    letter-spacing: 0.2px
+    font-size: 15px
+  .left h4
+    margin-bottom: 9px
+  .right h4
+    margin-bottom: 23px
+
+  address
+    font-style: normal
+    font-size: 14px
+    line-height: 18px
+
+  span.phone
+    margin-top: 22px
+    font-size: 14px
+    display: block
+
+  input, textarea
+    width: 96%
+    background: transparent
+    border: 1px solid $grey_light
+    text-transform: uppercase
+    font-size: 12px
+    padding: 12px 2%
+    color: $grey_dark
+
+    +input-placeholder
+      +opacity(1)
+      color: $grey_mid
+
+  input
+    margin-bottom: 19px
+    &.empty
+      color: red
+      +input-placeholder
+        color: red
+
+
+  textarea
+    height: 130px
+    margin-bottom: 25px
+    resize: none
+
+  button
+    float: right
+    border: 2px solid $grey_light
+    background: none
+    width: 121px
+    height: 42px
+    color: $grey_dark
+
+  p.hint
+    color: red
+    float: left
+    font-size: 11px
+    text-transform: uppercase
+    margin: 0
+
+  a.close
+    display: block
+    position: absolute
+    top: 0
+    right: 0
+    cursor: pointer
+    +replace-text-with-dimensions("cross.png")
