@@ -5,6 +5,7 @@ var config = require('./gulp.config')();
 var del = require('del');
 var $ = require('gulp-load-plugins')({lazy:true});
 var port = process.env.PORT || config.defaultPort;
+var fs = require('fs');
 
 gulp.task('vet', function() {
     log('Analizing code with JsHint and JSCS');
@@ -308,9 +309,18 @@ function startBrowserSync(isDev, server) {
         notify: true,
         reloadDelay: 1000
     };
-    
+
     if(server){
-      options['server'] = {baseDir: './'};
+      options['server'] = {
+        baseDir: './',
+        middleware: function (req, res, next) {
+          if (!fs.existsSync('./'+req._parsedUrl.pathname)) {
+            console.log('not exists');
+            req.url = "/index.html";
+          }
+          next();
+        }
+      };
     }else{
       options['proxy'] = 'ciberseguridad.dev';
     }

@@ -8,9 +8,16 @@ getStates = ->
         controller: 'Dashboard'
         controllerAs: 'vm'
         title: 'Home'
-        settings:
-          nav: 1
-          content: '<i class="fa fa-dashboard"></i> Dashboard'
+    }
+
+    {
+      state: 'graph'
+      config:
+        url: '/graph/:countries'
+        templateUrl: 'app/dashboard/dashboard.html'
+        controller: 'Dashboard'
+        controllerAs: 'vm'
+        title: 'Home'
     }
 
     {

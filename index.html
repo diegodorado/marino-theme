@@ -18,6 +18,7 @@
 
     <!-- build:css ../assets/css/lib.css -->
     <!-- bower:css -->
+    <link rel="stylesheet" href="/bower_components/angular-tooltips/dist/angular-tooltips.min.css" />
     <link rel="stylesheet" href="/bower_components/normalize.css/normalize.css" />
     <!-- endbower -->
     <!-- endbuild -->
@@ -46,16 +47,21 @@
       <div class="container" ng-include="'app/layout/footer.html'"></div>
     </div>
 
+    <div ui-view="modal" autoscroll="false"></div>
+
     <!-- build:js ../assets/js/lib.js -->
     <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/angular-google-chart/ng-google-chart.js"></script>
-
+    <script src="/bower_components/angular-message-format/angular-message-format.min.js"></script>
     <script src="/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/bower_components/angular-tooltips/dist/angular-tooltips.min.js"></script>
     <script src="/bower_components/angular-translate/angular-translate.js"></script>
     <script src="/bower_components/angular-translate-handler-log/angular-translate-handler-log.js"></script>
+    <script src="/bower_components/messageformat/messageformat.js"></script>
+    <script src="/bower_components/angular-translate-interpolation-messageformat/angular-translate-interpolation-messageformat.js"></script>
     <script src="/bower_components/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
     <script src="/bower_components/angular-translate-loader-url/angular-translate-loader-url.js"></script>
     <script src="/bower_components/angular-cookies/angular-cookies.js"></script>
@@ -63,6 +69,8 @@
     <script src="/bower_components/angular-translate-storage-local/angular-translate-storage-local.js"></script>
     <script src="/bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
+    <script src="/bower_components/messageformat/locale/es.js"></script>
+    <script src="/bower_components/messageformat/locale/en.js"></script>
     <!-- endbuild -->
 
     <!-- build:js ../assets/js/app.js -->
@@ -72,11 +80,12 @@
     <script src="/.tmp/app/dashboard/dashboard.module.js"></script>
     <script src="/.tmp/app/layout/layout.module.js"></script>
     <script src="/.tmp/app/map/map.module.js"></script>
+    <script src="/.tmp/app/overlays/overlays.module.js"></script>
     <script src="/.tmp/app/blocks/exception/exception.module.js"></script>
     <script src="/.tmp/app/blocks/logger/logger.module.js"></script>
     <script src="/.tmp/app/blocks/router/router.module.js"></script>
     <script src="/.tmp/templates.js"></script>
-    <script src="/.tmp/app/blocks/drag-and-drop.directive.js"></script>  
+    <script src="/.tmp/app/blocks/drag-and-drop.directive.js"></script>
     <script src="/.tmp/app/core/config.js"></script>
     <script src="/.tmp/app/core/dataservice.js"></script>
     <script src="/.tmp/app/dashboard/dashboard.controller.js"></script>
@@ -86,6 +95,10 @@
     <script src="/.tmp/app/layout/shell.controller.js"></script>
     <script src="/.tmp/app/map/map.controller.js"></script>
     <script src="/.tmp/app/map/map.route.js"></script>
+    <script src="/.tmp/app/overlays/country-details.controller.js"></script>
+    <script src="/.tmp/app/overlays/indicator.controller.js"></script>
+    <script src="/.tmp/app/overlays/modal.controller.js"></script>
+    <script src="/.tmp/app/overlays/modal.route.js"></script>
     <script src="/.tmp/app/blocks/exception/exception-handler.provider.js"></script>
     <script src="/.tmp/app/blocks/exception/exception.js"></script>
     <script src="/.tmp/app/blocks/logger/logger.js"></script>
