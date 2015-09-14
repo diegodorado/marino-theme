@@ -11,7 +11,6 @@ getStates = ->
             templateUrl: 'app/overlays/modal.html'
             controller: 'Modal'
         abstract: true
-        sticky: true
 
     }
 
@@ -39,10 +38,11 @@ getStates = ->
     {
       state: 'modal.contact'
       config:
-        #url: '/contact'
+        url: '/contact'
         views:
           "modal":
             templateUrl: 'app/overlays/contact.html'
+            controller: 'Contact'
 
     }
 

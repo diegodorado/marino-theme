@@ -7,11 +7,10 @@
   background: #fff
   z-index: 2001
   opacity: 0.9
-  display: none
 
 .modal-holder
   position: absolute
-  top: 40px //0
+  top: 0
   left: 0
   right: 0
   bottom: 0
@@ -53,10 +52,10 @@
   border: 1px solid $grey_mid
   margin: 0 auto
   padding: 42px
+  +container($large)
 
   .container
     position: relative
-    +show-grid( $large 12 overlay show )
     +container($large 12)
     .left
       +span(5 of 12)
@@ -108,12 +107,14 @@
       +opacity(1)
       color: $grey_mid
 
-  input
-    margin-bottom: 19px
-    &.empty
+    &.ng-invalid
       color: red
       +input-placeholder
         color: red
+
+
+  input
+    margin-bottom: 19px
 
 
   textarea

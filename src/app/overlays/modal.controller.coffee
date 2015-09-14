@@ -1,19 +1,18 @@
 ### @ngInject ###
 Modal = ($scope, $window, $document) ->
 
-  @close = () ->
+  $scope.close = () ->
     $window.history.back()
 
 
-  $window.onclick = () =>
-    console.log 'close me!'
-    @close()
+  $window.onclick = (event) ->
+    if event.target.className is 'modal-holder'
+      $scope.close()
 
 
-  keyupHandler = (event) =>
-    console.log event.keyCode
+  keyupHandler = (event) ->
     if event.keyCode is 27
-      @close()
+      $scope.close()
 
 
   $document.on('keyup', keyupHandler)
