@@ -1,4 +1,5 @@
 Dashboard = (logger, $scope, $window) ->
+
   vm = this
 
   @loadChart = ->
@@ -7,7 +8,7 @@ Dashboard = (logger, $scope, $window) ->
       color = 0
       if c is @last_selected_country
         color = 2
-      else if c in @selected_countries
+      else if c.code in @selected_countries_codes
         color = 1
 
       @chart.data.push [c.code, color]
@@ -86,7 +87,12 @@ Dashboard = (logger, $scope, $window) ->
       [..., last] = @selected_countries
       @last_selected_country = if last? then last else null
 
-    @loadChart()
+
+    @selected_countries_codes = (c.code for c in @selected_countries)
+
+    $scope.$state.go("graph", {countries: @selected_countries_codes.join('-')});
+
+    #@loadChart()
 
 
 
@@ -128,27 +134,35 @@ Dashboard = (logger, $scope, $window) ->
       # so that it can refresh the UI
       $scope.$apply()
 
+
+  @loadCountries = () ->
+    @selected_countries = []
+    @selected_countries_codes = $scope.$stateParams.countries.split('-')
+    for code in @selected_countries_codes
+      c = (c for c in $scope.countries when c.code is code)[0]
+      if typeof c isnt 'undefined'
+        @selected_countries.push c
+        if c.id is @last_selected_country?.id
+          @last_selected_country = c
+
+    unless @last_selected_country
+      [..., @last_selected_country] = @selected_countries
+
+
+  @last_selected_country = null
   @chartWrapper = null
   @countrySelectOpened = false
   @countrySelectHeaderOpened = false
-  @last_selected_country = null
-  @selected_countries = []
   @title = 'Dashboard'
   logger.info 'Activated Dashboard'
+  @loadCountries()
   @loadChart()
 
 
+
   $scope.$on 'data-loaded', (event, args) =>
+    @loadCountries()
     @loadChart()
-    ids = (c.id for c in @selected_countries)
-    @selected_countries = []
-    for id in ids
-      c = (c for c in $scope.countries when c.id is id)[0]
-      @selected_countries.push c
-      if c.id is @last_selected_country.id
-        @last_selected_country = c
-
-
 
 
   $scope.handleDrop = (itemId, binId) =>
@@ -163,6 +177,10 @@ Dashboard = (logger, $scope, $window) ->
 
     @selected_countries[itemIndex] = bin
     @selected_countries[binIndex] = item
+
+    @selected_countries_codes = (c.code for c in @selected_countries)
+    $scope.$state.go("graph", {countries: @selected_countries_codes.join('-')})
+
 
 
   return
