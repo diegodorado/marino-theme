@@ -17,7 +17,6 @@ routerHelperProvider = ($locationProvider, $stateProvider, $urlRouterProvider) -
 
     configureStates = (states, otherwisePath) ->
       states.forEach (state) ->
-        #state.config.resolve = angular.extend(state.config.resolve or {}, config.resolveAlways)
         $stateProvider.state state.state, state.config
 
       if otherwisePath and !hasOtherwise
@@ -48,10 +47,17 @@ routerHelperProvider = ($locationProvider, $stateProvider, $urlRouterProvider) -
     init = ->
       handleRoutingErrors()
       updateDocTitle()
+      setupInitialUrl()
 
 
     getStates = ->
       $state.get()
+
+    setupInitialUrl = ->
+      $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
+        if fromState.name is '' and toState.name isnt 'graph'
+          event.preventDefault()
+          $state.go('graph')
 
     updateDocTitle = ->
       $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
@@ -64,7 +70,6 @@ routerHelperProvider = ($locationProvider, $stateProvider, $urlRouterProvider) -
       configureStates: configureStates
       getStates: getStates
       stateCounts: stateCounts
-    #/////////////
 
 
     init()

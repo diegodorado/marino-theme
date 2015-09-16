@@ -1,7 +1,7 @@
 <footer ng-controller="Footer as vm">
-  <a href="#" id="go-to-top"></a>
+  <a id="go-to-top"></a>
   <div class="isologo">
-    <a href="/">
+    <a ui-sref="graph">
       <span translate>observatorio.de.la</span>
       <strong translate>ciberseguridad</strong>
       <span translate>en.america.latina.y.el.caribe</span>
@@ -9,10 +9,10 @@
   </div>
 
   <nav>
-    <a translate ui-sref="about({ locale: locale })">acerca.de</a>
-    <a translate ui-sref="contributors({ locale: locale })">contribuidores</a>
-    <a translate ui-sref="institutional-information({ locale: locale })">informacion.institucional</a>
-    <a translate ui-sref="modal.contact">contacto</a>
+    <a ui-sref="about({ locale: locale })" translate>acerca.de</a>
+    <a ui-sref="contributors({ locale: locale })" translate>contribuidores</a>
+    <a ui-sref="institutional-information({ locale: locale })" translate>informacion.institucional</a>
+    <a ui-sref="modal.contact" translate>contacto</a>
   </nav>
   <p class="copy" translate="copyright" translate-values="{ year: vm.year }"></p>
 

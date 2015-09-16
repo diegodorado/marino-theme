@@ -27,13 +27,11 @@ configure = ($compileProvider,
       prefix: themeUrl + '/assets/lang/',
       suffix: '.json'
     })  #.useUrlLoader('/api/messages')
-    .useMessageFormatInterpolation()
     .preferredLanguage('es')
     .fallbackLanguage('es')
     .useLocalStorage()
     .useMissingTranslationHandlerLog()
     .useSanitizeValueStrategy(null)
-    .determinePreferredLanguage()
 
 
 configure.$inject = [
@@ -79,6 +77,10 @@ core.run [
 
     $rootScope.$on '$translateChangeStart', (event, data) =>
       refreshData(data.language)
+
+    $rootScope.updateUrl = ->
+      $state.go($state.current, $stateParams, {notify: false})
+
 
 
     refreshData()

@@ -8,6 +8,5 @@ angular.module 'app.core', [
     'googlechart'
     'pascalprecht.translate'
     'ngCookies'
-    'ngMessageFormat'
     '720kb.tooltips'
 ]

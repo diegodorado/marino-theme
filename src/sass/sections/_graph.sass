@@ -1,8 +1,25 @@
 section.graph
   +no-select
   padding-bottom: 40px
+
+  nav
+    padding-top: 20px
+    text-align: right
+    font-size: 0
+    a
+      display: inline-block
+      width: 40px
+      height: 25px
+      border: 1px solid $grey_light
+    .prev
+      background: image-url("arrow-left.png") no-repeat center center
+    .next
+      background: image-url("arrow-right.png") no-repeat center center
+
+
   header
     text-align: right
+    padding-top: 20px
 
   .factors, .indicators
     padding-top: 5px
@@ -67,7 +84,6 @@ section.graph
 
 
   header.countries
-    padding-top: 47px
     .country-header
       padding: 21px 0 10px
       position: relative

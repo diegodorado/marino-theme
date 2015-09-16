@@ -1,23 +1,44 @@
 getStates = ->
   [
+    #exists only to be redirected
     {
-      state: 'dashboard'
+      state: 'root'
       config:
         url: '/'
-        templateUrl: 'app/dashboard/dashboard.html'
-        controller: 'Dashboard'
-        controllerAs: 'vm'
-        title: 'Home'
     }
 
     {
       state: 'graph'
       config:
-        url: '/graph/:countries'
-        templateUrl: 'app/dashboard/dashboard.html'
-        controller: 'Dashboard'
-        controllerAs: 'vm'
+        url: '/graph/:countries/:last_selected/:offset/:colapsed_dimensions'
+        params:
+          countries:
+            value: ''
+            squash: false
+          last_selected:
+            value: ''
+            squash: false
+          offset:
+            value: '0'
+            squash: false
+          colapsed_dimensions:
+            value: ''
+            squash: false
         title: 'Home'
+        views:
+          "":
+            templateUrl: 'app/dashboard/dashboard.html'
+            controller: 'Dashboard'
+            controllerAs: 'vm'
+          "aside@graph":
+            templateUrl: 'app/dashboard/aside.html'
+            controller: 'Aside'
+          "graph@graph":
+            templateUrl: 'app/dashboard/graph.html'
+            controller: 'Graph'
+          "stats@graph":
+            templateUrl: 'app/dashboard/stats.html'
+            controller: 'Stats'
     }
 
     {

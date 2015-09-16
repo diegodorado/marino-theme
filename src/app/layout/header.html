@@ -1,7 +1,7 @@
 <header ng-controller="Header as vm">
 
   <h1 class="isologo">
-    <a href="/">
+    <a ui-sref="graph">
       <span translate>observatorio.de.la</span>
       <strong translate>ciberseguridad</strong>
       <span translate>en.america.latina.y.el.caribe</span>
@@ -15,17 +15,17 @@
     </a>
     <ul ng-show="vm.langOpened">
       <li>
-        <a ng-class="{active: locale=='en'}" href="#" ng-click="vm.changeLocale('en')" translate>english</a>
+        <a ng-class="{active: locale=='en'}" ng-click="vm.changeLocale('en')" translate>english</a>
       </li>
       <li>
-        <a ng-class="{active: locale=='es'}" href="#" ng-click="vm.changeLocale('es')" translate>espanol</a>
+        <a ng-class="{active: locale=='es'}" ng-click="vm.changeLocale('es')" translate>espanol</a>
       </li>
     </ul>
   </nav>
 
   <nav class="partners">
-    <a href="#" class="oea">OAE</a>
-    <a href="#" class="bid">BID</a>
+    <a class="oea">OAE</a>
+    <a class="bid">BID</a>
   </nav>
 
 </header>
