@@ -2,22 +2,8 @@
   <div class="aside" ui-view="aside"></div>
 
   <div class="map">
-    <div class="eq" ng-class="{ghost: vm.last_selected_country === null}">
-      <span class="country-name">{{vm.last_selected_country.name || ('pais' | translate)}}</span>
-      <div ng-repeat="dimension in dimensions" class="dimension dim-{{dimension.id}}">
-        <span>{{ dimension.title }}</span>
-        <div ng-repeat="factor in dimension.factors" class="factor">
-          <div class="indicators">
-            <div ng-repeat="indicator in factor.indicators" class="indicator">
-              <div class="country-ml" ng-class="'ml-'+(vm.last_selected_country.maturity_levels[indicator.id]||0)">
-                <i></i><i></i><i></i><i></i><i></i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div id="geochart" google-chart ng-style="vm.chartStyle" chart="vm.chart" on-ready="vm.chartOnReady(chartWrapper)" on-select="vm.chartOnSelect(selectedItem)"></div>
+    <div ui-view="eq"></div>
+    <div ui-view="map"></div>
   </div>
 </section>
 

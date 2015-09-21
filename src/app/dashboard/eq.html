@@ -1,0 +1,15 @@
+<div class="eq" ng-class="{ghost: last_selected() === null}">
+  <span class="country-name">{{last_selected().name || ('pais' | translate)}}</span>
+  <div ng-repeat="dimension in dimensions" class="dimension dim-{{dimension.id}}">
+    <span>{{ dimension.title }}</span>
+    <div ng-repeat="factor in dimension.factors" class="factor">
+      <div class="indicators">
+        <div ng-repeat="indicator in factor.indicators" class="indicator">
+          <div class="country-ml" ng-class="'ml-'+(last_selected().maturity_levels[indicator.id]||0)" ng-animate="'animate'" >
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

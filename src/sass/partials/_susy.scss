@@ -4,3 +4,18 @@ $large: 960px;
 $wide: 1240px;
 
 $breakpoints: $small $medium $large $wide;
+
+body::before{
+  content: "small";
+  display: none; /* Prevent from displaying. */
+  @include breakpoint($medium){
+    content: "medium";
+  }
+  @include breakpoint($large){
+    content: "large";
+  }
+  @include breakpoint($wide){
+    content: "wide";
+  }
+
+}

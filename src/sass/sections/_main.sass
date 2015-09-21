@@ -1,5 +1,6 @@
 
 section.main
+  background: $white
   .aside
     padding-top: 90px
     padding-bottom: 10px
@@ -47,6 +48,24 @@ section.main
     overflow: hidden
     position: relative
 
+    nav.zoom
+      position: absolute
+      top: 118px
+      right: 10px
+      z-index: 500
+      a
+        display: block
+        background: $white
+        padding: 0 16px
+        border: 1px solid $grey_light
+        text-align: center
+        font-size: 14px
+        line-height: 31px
+        margin-bottom: 10px
+        color: $grey_light
+        &.current, &:hover
+          color: $black
+
   .select-country
     width: 100%
     top: 59px
@@ -63,6 +82,12 @@ section.main
 section.main
   +container
 
+  +breakpoint($medium)
+    .aside
+      +span(isolate 1 at 1 of (4 1) (40px 6px))
+    .map
+      +span(isolate 1 at 2 of (4 1) (40px 6px))
+
   +breakpoint($large)
     .aside
       +span(isolate 1 at 1 of (4 5) (40px 6px))
@@ -76,9 +101,7 @@ section.main
 
 
 /* ---singles----- */
-header.countries
-  .country-header
-    cursor: move
+
 
 .drag
   background: #efefef
@@ -117,6 +140,13 @@ header.countries
       margin-bottom: 3px
   .country-ml
     margin-top: 2px
+
+
+  @for $i from 1 through 5
+    .country-ml i:nth-child(#{$i})
+      transition-property: background
+      transition-duration: 0.8s
+      transition-delay: #{(-1+$i)/10}s
 
 
 #geochart
@@ -179,14 +209,23 @@ header.countries
 
 
 header.countries
-  +container
-  +pre(4 of 9)
-  +break
-  .country-header
-    +span(1 of 5)
-    &:nth-child(5)
-      +span(1 of 5 last)
+  +breakpoint($medium)
+    +container($medium 5)
+    +pre(4 of 5)
+    +break
+    .country-header
+      +span(1 of 1 last)
 
+  +breakpoint($large)
+    +container($large 9)
+    +pre(4 of 9)
+    .country-header
+      +span(1 of 5)
+      &:nth-child(5)
+        +span(1 of 5 last)
+
+  +no-select
+  .country-header
     text-align: center
     b
       display: inline-block
@@ -197,7 +236,6 @@ header.countries
       font-size: 12px
       height: 35px
   .ghost
-    +no-select
     span.hint
       color: $grey_mid
       display: block

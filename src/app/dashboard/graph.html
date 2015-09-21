@@ -1,16 +1,16 @@
-<nav>
+<nav ng-show="showPager()" >
   <a class="prev" ng-click="prev()"></a>
   <a class="next" ng-click="next()"></a>
 </nav>
 <header class="countries">
-  <div ng-repeat="country in countries | selectedCountries:$stateParams.countries.split('-') | offset:$stateParams.offset | limitTo:5" id="country-{{country.code}}" draggable droppable drop="handleDrop" class="country-header" ng-class="{'last-selected':($stateParams.last_selected == country.code)}">
+  <div ng-repeat="country in shownCountries()" id="country-{{country.code}}" draggable droppable drop="handleDrop" class="country-header" ng-class="{'last-selected':($stateParams.last_selected == country.code)}">
     <a class="close" ng-click="toggleCountry(country.code)"></a>
     <b class="flag-{{country.code}}"></b>
     <span class="country-name">{{country.name}}</span>
-    <a class="info-link"></a>
+    <a  ui-sref="modal.country-details({code: country.code})" class="info-link"></a>
   </div>
 
-  <div ng-show="($stateParams.countries.split('-').length - $stateParams.offset) < 5 " class="country-header ghost" ng-click="toggleCountrySelect($event)">
+  <div ng-show="showGhostCountry()" class="country-header ghost" ng-click="toggleCountrySelect($event)" id="country-ghost" droppable drop="handleDrop" >
     <span class="hint" translate>selecciona.un.pais.para.comparar</span>
     <i></i>
     <ul ng-show="countrySelectOpened" class="select-country">
@@ -35,10 +35,10 @@
         <div class="indicators">
           <div ng-repeat="indicator in factor.indicators" class="indicator">
             <h5>{{indicator.title}}</h5>
-            <div ng-repeat="country in countries | selectedCountries:$stateParams.countries.split('-') | offset:$stateParams.offset | limitTo:5" class="country-ml" ng-class="'ml-'+(country.maturity_levels[indicator.id])">
+            <div ng-repeat="country in shownCountries()" class="country-ml" ng-class="'ml-'+(country.maturity_levels[indicator.id])">
               <i></i><i></i><i></i><i></i><i></i>
             </div>
-            <div class="country-ml ghost" ng-show="($stateParams.countries.split('-').length - $stateParams.offset) < 5 ">
+            <div class="country-ml ghost" ng-show="showGhostCountry()">
               <i></i><i></i><i></i><i></i><i></i>
             </div>
           </div>

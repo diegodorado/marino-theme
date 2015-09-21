@@ -1,7 +1,7 @@
 Graph = ($scope, $rootScope) ->
 
   $scope.next = ->
-    if $scope.$stateParams.offset < $scope.$stateParams.countries.split('-').length
+    if $scope.$stateParams.offset < $scope.countriesSelected() - $scope.countriesPerPage()
       $scope.$stateParams.offset++
       $scope.updateUrl()
 
@@ -23,7 +23,7 @@ Graph = ($scope, $rootScope) ->
     codes = []
     if $scope.$stateParams.countries.length > 0
       codes = $scope.$stateParams.countries.split('-')
-      
+
     $scope.countrySelectOpened = false
 
     index = codes.indexOf(code)
@@ -59,7 +59,9 @@ Graph = ($scope, $rootScope) ->
     $scope.$stateParams.colapsed_dimensions.indexOf(dimension.id) > -1
 
 
+
   $scope.handleDrop = (codeA, codeB) ->
+    console.log codeA, codeB
     codeA = codeA.replace('country-','')
     codeB = codeB.replace('country-','')
     codes = $scope.$stateParams.countries.split('-')

@@ -51,7 +51,8 @@ core.run [
   '$stateParams'
   'dataservice'
   '$translate'
-  ($rootScope, $state, $stateParams, dataservice, $translate) ->
+  '$window'
+  ($rootScope, $state, $stateParams, dataservice, $translate, $window) ->
     # It's very handy to add references to $state and $stateParams to the
     # $rootScope so that you can access them from any scope within your
     # applications. For example, <li ng-class="{ active: $state.includes
@@ -75,8 +76,22 @@ core.run [
         $rootScope.$broadcast 'data-loaded'
 
 
-    $rootScope.$on '$translateChangeStart', (event, data) =>
+    $rootScope.$on '$translateChangeStart', (event, data) ->
       refreshData(data.language)
+
+    $rootScope.breakpoint = null
+
+    refreshBreakpoint = ->
+      s = $window.getComputedStyle(document.querySelector('body'), ':before')
+      v = s.getPropertyValue('content').replace(/\"/g, '')
+      if $rootScope.breakpoint isnt v
+        $rootScope.breakpoint = v
+        $rootScope.$broadcast('breakpoint:change')
+
+    refreshBreakpoint()
+
+    angular.element($window).on 'resize', () ->
+      refreshBreakpoint()
 
     $rootScope.updateUrl = ->
       $state.go($state.current, $stateParams, {notify: false})

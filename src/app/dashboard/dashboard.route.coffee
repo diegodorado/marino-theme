@@ -29,10 +29,16 @@ getStates = ->
           "":
             templateUrl: 'app/dashboard/dashboard.html'
             controller: 'Dashboard'
-            controllerAs: 'vm'
           "aside@graph":
             templateUrl: 'app/dashboard/aside.html'
             controller: 'Aside'
+          "eq@graph":
+            templateUrl: 'app/dashboard/eq.html'
+            controller: 'Eq'
+          "map@graph":
+            templateUrl: 'app/dashboard/map.html'
+            controller: 'MapCtrl'
+            controllerAs: 'vm'
           "graph@graph":
             templateUrl: 'app/dashboard/graph.html'
             controller: 'Graph'

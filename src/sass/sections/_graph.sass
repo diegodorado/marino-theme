@@ -1,4 +1,5 @@
 section.graph
+  background: $white
   +no-select
   padding-bottom: 40px
 
@@ -85,6 +86,7 @@ section.graph
 
   header.countries
     .country-header
+      cursor: move
       padding: 21px 0 10px
       position: relative
       border-bottom: 5px solid transparent
@@ -139,6 +141,21 @@ section.graph
 
 
 section.graph
+  +breakpoint($medium)
+    +container($medium 5)
+    +show-grid( $medium 5 overlay show )
+    .graph-data, .factors, .factor, .indicators, .indicator
+      +container
+      +break
+
+    .dimension
+      h3, h4, h5
+        margin: 0
+        +span(4 of 5)
+
+    .country-ml
+      +span(1 of 5 last)
+
   +breakpoint($large)
     +container($large 9)
     +show-grid( $large 9 overlay show )

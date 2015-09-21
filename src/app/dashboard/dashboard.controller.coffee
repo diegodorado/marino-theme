@@ -1,93 +1,37 @@
-Dashboard = (logger, $scope, $window) ->
+Dashboard = ($scope, $filter) ->
 
-  vm = this
-
-  @loadChart = ->
-    @chart.data = [['region', 'color']]
-    for c in $scope.countries
-      color = 0
-      if c.code is $scope.$stateParams.last_selected
-        color = 2
-      else if $scope.$stateParams.countries.indexOf(c.code) > -1
-        color = 1
-
-      @chart.data.push [c.code, color]
-
-    return
-
-  @chartStyle =
-    height: '1500px'
-    top: '-684px'
-    left: '-860px'
-
-  @chart =
-    type: 'GeoChart'
-    data: [['region', 'color'],['ar', 0]]
-    options:
-      width: 2200
-      colorAxis:
-        values: [0,1,2]
-        colors: ['#f0f0f0','#ddd','#cacaca']
-      backgroundColor: 'transparent'
-      datalessRegionColor: 'transparent'
-      defaultColor: '#f5f5f5'
-      displayMode: 'regions'
-      region: '019'
-      legend: 'none'
-      tooltip:
-        trigger: 'none'
+  $scope.shownCountries = ->
+    codes = $scope.$stateParams.countries.split('-')
+    selectedCountries = $filter('selectedCountries')($scope.countries,codes)
+    offset = $filter('offset')(selectedCountries,$scope.$stateParams.offset)
+    $filter('limitTo')(offset,$scope.countriesPerPage())
 
 
-  @getMaturityLevel= (country_id,indicator_id)->
-    c = (c for c in $scope.countries when c.id is country_id)[0]
-    return c.maturity_levels[indicator_id]
-
-  @getEqLevel= (country, indicator_id)->
-    if country? then country.maturity_levels[indicator_id] else 5
-
-  @chartOnReady = (chartWrapper) =>
-    @chartWrapper = chartWrapper
-
-  @chartOnSelect = (selectedItem) =>
-    dt = @chartWrapper.getDataTable()
+  $scope.last_selected = ->
     code = $scope.$stateParams.last_selected
-    if selectedItem?
-      code = dt.getValue(selectedItem.row,0)
+    country = (c for c in $scope.countries when c.code is code)[0]
+    return country
 
-    codes = []
-    if $scope.$stateParams.countries.length > 0
-      codes = $scope.$stateParams.countries.split('-')
+  $scope.countriesSelected = ->
+    $scope.$stateParams.countries.split('-').length
 
-    index = codes.indexOf(code)
-    if index is -1
-      $scope.$stateParams.last_selected = code
-      codes.push code
+  $scope.countriesPerPage = ->
+    if $scope.breakpoint is 'wide' or $scope.breakpoint is 'large'
+      return 5
     else
-      codes.splice index, 1
-      [..., last] = codes
-      $scope.$stateParams.last_selected = if last? then last else ''
+      return 1
 
-    $scope.$stateParams.countries = codes.join('-')
-    $scope.updateUrl()
-    @loadChart()
+  $scope.showGhostCountry = ->
+    $scope.countriesSelected() < $scope.countriesPerPage()
 
-  @loadChart()
-
-  $scope.$on 'country-toggled', (event, args) =>
-    @loadChart()
-
-  $scope.$on 'data-loaded', (event, args) =>
-    @loadChart()
-
-
-
+  $scope.showPager = ->
+    $scope.countriesSelected() > $scope.countriesPerPage()
 
   return
 
 Dashboard.$inject = [
-  'logger'
   '$scope'
-  '$window'
+  '$filter'
 ]
 
 angular.module('app.dashboard').controller 'Dashboard', Dashboard

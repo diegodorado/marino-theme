@@ -1,13 +1,5 @@
 Aside = ($scope, $rootScope) ->
 
-  $scope.next = ->
-    $scope.$stateParams.offset++
-    $scope.updateUrl()
-
-  $scope.prev = ->
-    $scope.$stateParams.offset--
-    $scope.updateUrl()
-
   $scope.last_selected = ->
     code = $scope.$stateParams.last_selected
     country = (c for c in $scope.countries when c.code is code)[0]
