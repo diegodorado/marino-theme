@@ -42,29 +42,14 @@ section.main
         +opacity(0.25)
 
   .map
+    +no-select
     border-left: 1px solid $grey_light
     border-bottom: 1px solid $grey_light
     height: 740px
     overflow: hidden
     position: relative
 
-    nav.zoom
-      position: absolute
-      top: 118px
-      right: 10px
-      z-index: 500
-      a
-        display: block
-        background: $white
-        padding: 0 16px
-        border: 1px solid $grey_light
-        text-align: center
-        font-size: 14px
-        line-height: 31px
-        margin-bottom: 10px
-        color: $grey_light
-        &.current, &:hover
-          color: $black
+
 
   .select-country
     width: 100%
@@ -122,12 +107,32 @@ section.main
     border-left: 1px dotted grey
     border-right: 1px dotted grey
 
+nav.zoom
+  position: absolute
+  top: 118px
+  right: 10px
+  z-index: 500
+  a
+    display: block
+    background: $white
+    padding: 0 16px
+    border: 1px solid $grey_light
+    text-align: center
+    font-size: 14px
+    line-height: 31px
+    margin-bottom: 10px
+    color: $grey_light
+    &.current, &:hover
+      color: $black
 .eq
+  position: absolute
+  top: 79px
+  left: 20px
+  z-index: 500
   &.ghost
     .country-name
       color: $grey_light
 
-  margin: 79px 0 0 20px
   .country-name
     display: block
     margin-bottom: 19px

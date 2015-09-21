@@ -14,9 +14,7 @@ MapCtrl = ($scope) ->
 
     return
 
-  $scope.chartStyle =
-    top: '-684px'
-    left: '-860px'
+  $scope.chartStyle = {}
 
   $scope.chart =
     type: 'GeoChart'
@@ -34,32 +32,56 @@ MapCtrl = ($scope) ->
       tooltip:
         trigger: 'none'
 
+  $scope.zoomLevel = 2
 
-  $scope.zoomLevel = 0
   $scope.changeZoom = (zoom_level) ->
     $scope.zoomLevel = zoom_level
-    if zoom_level is 0
-      $scope.chartStyle =
-        top: '-224px'
-        left: '-60px'
-      $scope.chart.options.width = 700
-      $scope.chart.options.height = 1200
-      $scope.chart.options.region = '013'
-    if zoom_level is 1
-      $scope.chartStyle =
-        top: '-684px'
-        left: '-860px'
-      $scope.chart.options.width = 1200
-      $scope.chart.options.height = 1200
-      $scope.chart.options.region = '013'
-    if zoom_level is 2
-      $scope.chartStyle =
-        top: '-684px'
-        left: '-860px'
-      $scope.chart.options.width = 2200
-      $scope.chart.options.height = 1500
-      #$scope.chart.options.region = '005'
-      $scope.chart.options.region = '019'
+    if $scope.breakpoint is 'wide'
+      if zoom_level is 0
+        $scope.chartStyle =
+          top: '-220px'
+          left: '0px'
+        $scope.chart.options.width = 700
+        $scope.chart.options.height = 1200
+        $scope.chart.options.region = '013'
+      if zoom_level is 1
+        $scope.chartStyle =
+          top: '40px'
+          left: '-90px'
+        $scope.chart.options.width = 800
+        $scope.chart.options.height = 800
+        $scope.chart.options.region = '029'
+      if zoom_level is 2
+        $scope.chartStyle =
+          top: '-680px'
+          left: '-860px'
+        $scope.chart.options.width = 2200
+        $scope.chart.options.height = 1500
+        #$scope.chart.options.region = '005'
+        $scope.chart.options.region = '019'
+
+    if $scope.breakpoint is 'large'
+      if zoom_level is 0
+        $scope.chartStyle =
+          top: '-220px'
+          left: '40px'
+        $scope.chart.options.width = 500
+        $scope.chart.options.height = 1200
+        $scope.chart.options.region = '013'
+      if zoom_level is 1
+        $scope.chartStyle =
+          top: '40px'
+          left: '-120px'
+        $scope.chart.options.width = 700
+        $scope.chart.options.height = 700
+        $scope.chart.options.region = '029'
+      if zoom_level is 2
+        $scope.chartStyle =
+          top: '-680px'
+          left: '-940px'
+        $scope.chart.options.width = 2200
+        $scope.chart.options.height = 1500
+        $scope.chart.options.region = '019'
 
 
 
@@ -90,7 +112,7 @@ MapCtrl = ($scope) ->
     loadChart()
 
 
-  $scope.changeZoom(0)
+  $scope.changeZoom($scope.zoomLevel)
   loadChart()
 
   $scope.$on 'country-toggled', (event, args) ->
@@ -99,6 +121,8 @@ MapCtrl = ($scope) ->
   $scope.$on 'data-loaded', (event, args) ->
     loadChart()
 
+  $scope.$on 'breakpoint:change', (event, args) ->
+    $scope.changeZoom($scope.zoomLevel)
 
   return
 
