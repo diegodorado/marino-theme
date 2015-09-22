@@ -1,6 +1,5 @@
 MapCtrl = ($scope) ->
 
-
   loadChart = ->
     $scope.chart.data = [['region', 'color']]
     for c in $scope.countries
@@ -94,26 +93,7 @@ MapCtrl = ($scope) ->
     if selectedItem?
       code = dt.getValue(selectedItem.row,0)
 
-    codes = []
-    if $scope.$stateParams.countries.length > 0
-      codes = $scope.$stateParams.countries.split('-')
-
-    index = codes.indexOf(code)
-    if index is -1
-      $scope.$stateParams.last_selected = code
-      codes.push code
-    else
-      codes.splice index, 1
-      [..., last] = codes
-      $scope.$stateParams.last_selected = if last? then last else ''
-
-    $scope.$stateParams.countries = codes.join('-')
-    $scope.updateUrl()
-    loadChart()
-
-
-  $scope.changeZoom($scope.zoomLevel)
-  loadChart()
+    $scope.toggleCountry(code)
 
   $scope.$on 'country-toggled', (event, args) ->
     loadChart()
@@ -124,6 +104,8 @@ MapCtrl = ($scope) ->
   $scope.$on 'breakpoint:change', (event, args) ->
     $scope.changeZoom($scope.zoomLevel)
 
+  $scope.changeZoom($scope.zoomLevel)
+  loadChart()
   return
 
 MapCtrl.$inject = [

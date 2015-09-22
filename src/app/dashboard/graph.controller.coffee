@@ -1,4 +1,4 @@
-Graph = ($scope, $rootScope) ->
+Graph = ($scope) ->
 
   $scope.next = ->
     if $scope.$stateParams.offset < $scope.countriesSelected() - $scope.countriesPerPage()
@@ -10,34 +10,21 @@ Graph = ($scope, $rootScope) ->
       $scope.$stateParams.offset--
       $scope.updateUrl()
 
-  $scope.toggleCountriesOff = ->
-    $scope.$stateParams.last_selected = ''
-    $scope.$stateParams.countries = ''
+  $scope.deselectAll = ->
+    $scope.navCountrySelectOpened = false
     $scope.countrySelectOpened = false
-    $scope.updateUrl()
-    $rootScope.$broadcast 'country-toggled'
+    $scope.toggleCountriesOff()
 
-  $scope.toggleCountry = (code, $event) ->
+  $scope.clickCountry = (code,$event) ->
+    $scope.navCountrySelectOpened = false
+    $scope.countrySelectOpened = false
     $event?.stopPropagation()
+    $scope.toggleCountry(code)
 
-    codes = []
-    if $scope.$stateParams.countries.length > 0
-      codes = $scope.$stateParams.countries.split('-')
-
-    $scope.countrySelectOpened = false
-
-    index = codes.indexOf(code)
-    if index is -1
-      $scope.$stateParams.last_selected = code
-      codes.push code
-    else
-      codes.splice index, 1
-      [..., last] = codes
-      $scope.$stateParams.last_selected = if last? then last else ''
-
-    $scope.$stateParams.countries = codes.join('-')
-    $scope.updateUrl()
-    $rootScope.$broadcast 'country-toggled'
+  $scope.navCountrySelectOpened = false
+  $scope.toggleNavCountrySelect = ($event) ->
+    $scope.navCountrySelectOpened = not $scope.navCountrySelectOpened
+    return
 
   $scope.countrySelectOpened = false
   $scope.toggleCountrySelect = ($event) ->
@@ -58,10 +45,7 @@ Graph = ($scope, $rootScope) ->
   $scope.colapsedDimensions = (dimension) ->
     $scope.$stateParams.colapsed_dimensions.indexOf(dimension.id) > -1
 
-
-
   $scope.handleDrop = (codeA, codeB) ->
-    console.log codeA, codeB
     codeA = codeA.replace('country-','')
     codeB = codeB.replace('country-','')
     codes = $scope.$stateParams.countries.split('-')
@@ -70,12 +54,10 @@ Graph = ($scope, $rootScope) ->
     $scope.$stateParams.countries = codes.join('-')
     $scope.updateUrl()
 
-
   return
 
 Graph.$inject = [
   '$scope'
-  '$rootScope'
 ]
 
 angular.module('app.dashboard').controller 'Graph', Graph

@@ -23,3 +23,21 @@
 
 .fade.ng-hide-add, .fade.ng-hide-remove
   transition: 0 .5s linear all
+
+
+.country-ml
+  font-size: 0
+  i
+    display: inline-block
+    width: 17px
+    height: 7px
+    border-right: 1px solid $white
+    background: $grey_lighter
+
+@each $colors in $dimensions_colors
+  $i: index($dimensions_colors, $colors)
+  .dim-#{$i}
+    color: map-get($colors, dark)
+    @for $j from 1 through 5
+      .ml-#{$j} i:nth-child(-n+#{$j})
+        background: map-get($colors, dark)

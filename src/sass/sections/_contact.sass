@@ -1,12 +1,5 @@
-.overlay-contact
-  background: $white
-  border: 1px solid $grey_mid
-  margin: 0 auto
-  padding: 42px
-  +container($large)
-
+.overlay.contact
   .container
-    position: relative
     +container($large 12)
     .left
       +span(5 of 12)
@@ -87,10 +80,3 @@
     font-size: 11px
     text-transform: uppercase
     margin: 0
-
-  a.close
-    display: block
-    position: absolute
-    top: 0
-    right: 0
-    +replace-text-with-dimensions("cross.png")
