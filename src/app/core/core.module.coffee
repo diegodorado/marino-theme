@@ -9,4 +9,5 @@ angular.module 'app.core', [
     'pascalprecht.translate'
     'ngCookies'
     '720kb.tooltips'
+    'ng-slide-down'
 ]

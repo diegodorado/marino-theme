@@ -5,33 +5,17 @@ section.graph
 
   nav
     padding-top: 20px
+    text-align: right
     font-size: 0
-    height: 27px
-    float: right
     a
-      display: block
-      float: left
+      display: inline-block
       width: 40px
       height: 25px
       border: 1px solid $grey_light
-      &:hover
-        background-color: $grey_lighter
     .prev
       background: image-url("arrow-left.png") no-repeat center center
     .next
       background: image-url("arrow-right.png") no-repeat center center
-    .select
-      color: $grey_mid
-      position: relative
-      line-height: 25px
-      text-align: center
-      font-size: 12px
-      width: auto
-      margin-right: 5px
-      padding: 0 10px
-    .select-country
-      top: 40px
-      left: -70px
 
 
   header
@@ -41,8 +25,11 @@ section.graph
   .factors, .indicators
     padding-top: 5px
 
+
   .dimension
-    padding-top: 35px
+    padding-top: 10px
+    &:first-child
+      padding-top: 35px
     h3
       font-size: 24px
       font-weight: normal
@@ -50,21 +37,28 @@ section.graph
       cursor: pointer
       position: relative
       +down-triangle($grey_dark, 14px, 13px, 0px)
+      &::after
+        transition: all 0.5s linear
       span
         display: block
         padding-right: 24px
-      &.colapsed
-        +right-triangle($grey_dark, 14px, 13px, 0px)
+    &.colapsed h3::after
+      transform: rotate(-90deg)
 
     .factor
-      margin-top: 5px
       h4
         text-align: right
         font-size: 18px
         font-weight: bold
         color: $black
-        line-height: 30px //22px
-        height: 30px //22px
+        line-height: 30px
+        height: 30px
+
+      &:first-child h4
+        margin-top: 5px
+
+      &:last-child
+        padding-bottom: 25px
 
     .indicator
       margin-bottom: 8px
@@ -140,6 +134,22 @@ section.graph
 
 
 
+.country-ml
+  font-size: 0
+  i
+    display: inline-block
+    width: 17px
+    height: 7px
+    border-right: 1px solid $white
+    background: $grey_lighter
+
+@each $colors in $dimensions_colors
+  $i: index($dimensions_colors, $colors)
+  .dim-#{$i}
+    color: map-get($colors, dark)
+    @for $j from 1 through 5
+      .ml-#{$j} i:nth-child(-n+#{$j})
+        background: map-get($colors, dark)
 
 
 

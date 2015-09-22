@@ -10,8 +10,11 @@ getStates = ->
     {
       state: 'graph'
       config:
-        url: '/graph/:countries/:last_selected/:offset/:colapsed_dimensions'
+        url: '/graph/zone/:zone/countries/:countries/selected/:last_selected/:offset/dimensions/:expanded_dimensions'
         params:
+          zone:
+            value: '2'
+            squash: false
           countries:
             value: ''
             squash: false
@@ -21,8 +24,8 @@ getStates = ->
           offset:
             value: '0'
             squash: false
-          colapsed_dimensions:
-            value: ''
+          expanded_dimensions:
+            value: '1-2-3-4-5'
             squash: false
         title: 'Home'
         views:

@@ -1,4 +1,4 @@
-Graph = ($scope) ->
+Graph = ($scope, $rootScope) ->
 
   $scope.next = ->
     if $scope.$stateParams.offset < $scope.countriesSelected() - $scope.countriesPerPage()
@@ -10,21 +10,34 @@ Graph = ($scope) ->
       $scope.$stateParams.offset--
       $scope.updateUrl()
 
-  $scope.deselectAll = ->
-    $scope.navCountrySelectOpened = false
+  $scope.toggleCountriesOff = ->
+    $scope.$stateParams.last_selected = ''
+    $scope.$stateParams.countries = ''
     $scope.countrySelectOpened = false
-    $scope.toggleCountriesOff()
+    $scope.updateUrl()
+    $rootScope.$broadcast 'country-toggled'
 
-  $scope.clickCountry = (code,$event) ->
-    $scope.navCountrySelectOpened = false
-    $scope.countrySelectOpened = false
+  $scope.toggleCountry = (code, $event) ->
     $event?.stopPropagation()
-    $scope.toggleCountry(code)
 
-  $scope.navCountrySelectOpened = false
-  $scope.toggleNavCountrySelect = ($event) ->
-    $scope.navCountrySelectOpened = not $scope.navCountrySelectOpened
-    return
+    codes = []
+    if $scope.$stateParams.countries.length > 0
+      codes = $scope.$stateParams.countries.split('-')
+
+    $scope.countrySelectOpened = false
+
+    index = codes.indexOf(code)
+    if index is -1
+      $scope.$stateParams.last_selected = code
+      codes.push code
+    else
+      codes.splice index, 1
+      [..., last] = codes
+      $scope.$stateParams.last_selected = if last? then last else ''
+
+    $scope.$stateParams.countries = codes.join('-')
+    $scope.updateUrl()
+    $rootScope.$broadcast 'country-toggled'
 
   $scope.countrySelectOpened = false
   $scope.toggleCountrySelect = ($event) ->
@@ -32,20 +45,35 @@ Graph = ($scope) ->
     return
 
   $scope.toggleDimension = (dimension) ->
-    colapsed = $scope.$stateParams.colapsed_dimensions.split('-')
-    index = colapsed.indexOf(dimension.id.toString())
-    if index is -1
-      colapsed.push dimension.id.toString()
-    else
-      colapsed.splice index, 1
+    expanded = []
+    if $scope.$stateParams.expanded_dimensions isnt 'none'
+      expanded = $scope.$stateParams.expanded_dimensions.split('-')
 
-    $scope.$stateParams.colapsed_dimensions = colapsed.join('-')
+
+    index = expanded.indexOf(dimension.id.toString())
+
+    if index is -1
+      expanded.push dimension.id.toString()
+    else
+      expanded.splice index, 1
+
+    if expanded.length is 0
+      $scope.$stateParams.expanded_dimensions = 'none'
+    else
+      $scope.$stateParams.expanded_dimensions = expanded.join('-')
+
     $scope.updateUrl()
 
-  $scope.colapsedDimension = (dimension) ->
-    $scope.$stateParams.colapsed_dimensions.indexOf(dimension.id) > -1
+  $scope.expandedDimension = (dimension) ->
+    if $scope.$stateParams.expanded_dimensions is 'none'
+      return false
+
+    $scope.$stateParams.expanded_dimensions.indexOf(dimension.id) > -1
+
+
 
   $scope.handleDrop = (codeA, codeB) ->
+    console.log codeA, codeB
     codeA = codeA.replace('country-','')
     codeB = codeB.replace('country-','')
     codes = $scope.$stateParams.countries.split('-')
@@ -54,10 +82,12 @@ Graph = ($scope) ->
     $scope.$stateParams.countries = codes.join('-')
     $scope.updateUrl()
 
+
   return
 
 Graph.$inject = [
   '$scope'
+  '$rootScope'
 ]
 
 angular.module('app.dashboard').controller 'Graph', Graph

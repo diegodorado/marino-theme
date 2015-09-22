@@ -1,17 +1,6 @@
-<nav>
-  <a ng-hide="showGhostCountry()" class="select" ng-click="toggleNavCountrySelect()">
-    <span translate>seleccionar.un.pais</span>
-    <ul ng-show="navCountrySelectOpened" class="select-country">
-      <li class="select-none" >
-        <span ng-click="deselectAll()" translate>deseleccionar.todos</span>
-      </li>
-      <li ng-repeat="country in countries" ng-class="{'selected':($stateParams.countries.indexOf(country.code) > -1), 'last-selected':($stateParams.last_selected == country.code)}" >
-        <span ng-click="clickCountry(country.code, $event)">{{country.name}}</span>
-      </li>
-    </ul>
-  </a>
-  <a ng-show="showPager()" class="prev" ng-click="prev()"></a>
-  <a ng-show="showPager()" class="next" ng-click="next()"></a>
+<nav ng-show="showPager()" >
+  <a class="prev" ng-click="prev()"></a>
+  <a class="next" ng-click="next()"></a>
 </nav>
 <header class="countries">
   <div ng-repeat="country in shownCountries()" id="country-{{country.code}}" draggable droppable drop="handleDrop" class="country-header" ng-class="{'last-selected':($stateParams.last_selected == country.code)}">
@@ -26,21 +15,21 @@
     <i></i>
     <ul ng-show="countrySelectOpened" class="select-country">
       <li class="select-none" >
-        <span ng-click="deselectAll()" translate>deseleccionar.todos</span>
+        <span ng-click="toggleCountriesOff()" translate>deseleccionar.todos</span>
       </li>
       <li ng-repeat="country in countries" ng-class="{'selected':($stateParams.countries.indexOf(country.code) > -1), 'last-selected':($stateParams.last_selected == country.code)}" >
-        <span ng-click="clickCountry(country.code, $event)">{{country.name}}</span>
+        <span ng-click="toggleCountry(country.code, $event)">{{country.name}}</span>
       </li>
     </ul>
   </div>
 </header>
 
 <div class="graph-data">
-  <div ng-repeat="dimension in dimensions" class="dimension dim-{{dimension.id}}"  ng-class="{'colapsed':colapsedDimension(dimension)}" >
+  <div ng-repeat="dimension in dimensions" class="dimension dim-{{dimension.id}}"  ng-class="{'colapsed':!expandedDimension(dimension)}" >
     <h3 ng-click="toggleDimension(dimension)">
       <span>{{ dimension.title }}</span>
     </h3>
-    <div class="factors fade" ng-animate="'animate'" ng-hide="colapsedDimension(dimension)">
+    <div class="factors fade" ng-slide-down="expandedDimension(dimension)">
       <div ng-repeat="factor in dimension.factors" class="factor">
         <h4>{{factor.title}}</h4>
         <div class="indicators">

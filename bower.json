@@ -29,6 +29,7 @@
     "angular-translate-storage-local": "~2.7.2",
     "angular-ui-router": "~0.2.15",
     "jquery": "~2.1.4",
+    "ng-slide-down": "~0.4.2",
     "normalize.css": "~3.0.3",
     "susy": "~2.2.5"
   },

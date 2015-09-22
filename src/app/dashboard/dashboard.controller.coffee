@@ -21,7 +21,13 @@ Dashboard = ($scope, $filter) ->
       [..., last] = codes
       $scope.$stateParams.last_selected = if last? then last else ''
 
-    $scope.$stateParams.countries = codes.join('-')
+
+
+    if codes.length is 0
+      $scope.$stateParams.countries = ''
+    else
+      $scope.$stateParams.countries = codes.join('-')
+
 
     if codes.length > $scope.countriesPerPage()
       $scope.$stateParams.offset = codes.length - $scope.countriesPerPage()
