@@ -55,7 +55,7 @@ Graph = ($scope, $rootScope) ->
     $scope.$stateParams.colapsed_dimensions = colapsed.join('-')
     $scope.updateUrl()
 
-  $scope.colapsedDimensions = (dimension) ->
+  $scope.colapsedDimension = (dimension) ->
     $scope.$stateParams.colapsed_dimensions.indexOf(dimension.id) > -1
 
 

@@ -25,11 +25,11 @@
 </header>
 
 <div class="graph-data">
-  <div ng-repeat="dimension in dimensions" class="dimension dim-{{dimension.id}}">
+  <div ng-repeat="dimension in dimensions" class="dimension dim-{{dimension.id}}"  ng-class="{'colapsed':colapsedDimension(dimension)}" >
     <h3 ng-click="toggleDimension(dimension)">
       <span>{{ dimension.title }}</span>
     </h3>
-    <div class="factors fade" ng-animate="'animate'" ng-hide="colapsedDimensions(dimension)">
+    <div class="factors fade" ng-animate="'animate'" ng-hide="colapsedDimension(dimension)">
       <div ng-repeat="factor in dimension.factors" class="factor">
         <h4>{{factor.title}}</h4>
         <div class="indicators">

@@ -30,6 +30,20 @@
     position: absolute
     right: $right
 
+
+=right-triangle($color, $width, $top, $right)
+  &::after
+    display: block
+    content: ' '
+    width: 0
+    height: 0
+    border-top: $width/2 solid transparent
+    border-bottom: $width/2 solid transparent
+    border-left: $width/2 solid $color
+    top: $top
+    position: absolute
+    right: $right
+
 =no-select
   -webkit-touch-callout: none
   -webkit-user-select: none
