@@ -5,17 +5,33 @@ section.graph
 
   nav
     padding-top: 20px
-    text-align: right
     font-size: 0
+    height: 27px
+    float: right
     a
-      display: inline-block
+      display: block
+      float: left
       width: 40px
       height: 25px
       border: 1px solid $grey_light
+      &:hover
+        background-color: $grey_lighter
     .prev
       background: image-url("arrow-left.png") no-repeat center center
     .next
       background: image-url("arrow-right.png") no-repeat center center
+    .select
+      color: $grey_mid
+      position: relative
+      line-height: 25px
+      text-align: center
+      font-size: 12px
+      width: auto
+      margin-right: 5px
+      padding: 0 10px
+    .select-country
+      top: 40px
+      left: -70px
 
 
   header
@@ -124,22 +140,6 @@ section.graph
 
 
 
-.country-ml
-  font-size: 0
-  i
-    display: inline-block
-    width: 17px
-    height: 7px
-    border-right: 1px solid $white
-    background: $grey_lighter
-
-@each $colors in $dimensions_colors
-  $i: index($dimensions_colors, $colors)
-  .dim-#{$i}
-    color: map-get($colors, dark)
-    @for $j from 1 through 5
-      .ml-#{$j} i:nth-child(-n+#{$j})
-        background: map-get($colors, dark)
 
 
 

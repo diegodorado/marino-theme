@@ -1,6 +1,17 @@
-<nav ng-show="showPager()" >
-  <a class="prev" ng-click="prev()"></a>
-  <a class="next" ng-click="next()"></a>
+<nav>
+  <a ng-hide="showGhostCountry()" class="select" ng-click="toggleNavCountrySelect()">
+    <span translate>seleccionar.un.pais</span>
+    <ul ng-show="navCountrySelectOpened" class="select-country">
+      <li class="select-none" >
+        <span ng-click="deselectAll()" translate>deseleccionar.todos</span>
+      </li>
+      <li ng-repeat="country in countries" ng-class="{'selected':($stateParams.countries.indexOf(country.code) > -1), 'last-selected':($stateParams.last_selected == country.code)}" >
+        <span ng-click="clickCountry(country.code, $event)">{{country.name}}</span>
+      </li>
+    </ul>
+  </a>
+  <a ng-show="showPager()" class="prev" ng-click="prev()"></a>
+  <a ng-show="showPager()" class="next" ng-click="next()"></a>
 </nav>
 <header class="countries">
   <div ng-repeat="country in shownCountries()" id="country-{{country.code}}" draggable droppable drop="handleDrop" class="country-header" ng-class="{'last-selected':($stateParams.last_selected == country.code)}">
@@ -15,10 +26,10 @@
     <i></i>
     <ul ng-show="countrySelectOpened" class="select-country">
       <li class="select-none" >
-        <span ng-click="toggleCountriesOff()" translate>deseleccionar.todos</span>
+        <span ng-click="deselectAll()" translate>deseleccionar.todos</span>
       </li>
       <li ng-repeat="country in countries" ng-class="{'selected':($stateParams.countries.indexOf(country.code) > -1), 'last-selected':($stateParams.last_selected == country.code)}" >
-        <span ng-click="toggleCountry(country.code, $event)">{{country.name}}</span>
+        <span ng-click="clickCountry(country.code, $event)">{{country.name}}</span>
       </li>
     </ul>
   </div>

@@ -1,13 +1,7 @@
 
-.overlay-country-details
-  background: $white
-  border: 1px solid $grey_mid
-  margin: 0 auto
-  padding: 42px
-  +container($large)
+.overlay.country-details
 
   .container
-    position: relative
     +container($large)
     .left
       +span(58%)
@@ -25,13 +19,6 @@
     letter-spacing: 1.3px
     padding: 0
     margin: 34px 0 4px 0
-
-  a.close
-    display: block
-    position: absolute
-    top: 0
-    right: 0
-    +replace-text-with-dimensions("cross.png")
 
   p
     color: $grey_dark

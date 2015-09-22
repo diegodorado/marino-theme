@@ -1,0 +1,16 @@
+.overlay
+  background: $white
+  border: 1px solid $grey_mid
+  margin: 0 auto
+  padding: 42px
+  +container($large)
+
+  .container
+    position: relative
+
+  a.close
+    display: block
+    position: absolute
+    top: 0
+    right: 0
+    +replace-text-with-dimensions("cross.png")
