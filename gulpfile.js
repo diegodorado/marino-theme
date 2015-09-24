@@ -50,10 +50,6 @@ gulp.task('templatecache', function() {
         ;
 });
 
-gulp.task('rsync', function() {
-    return gulp.src(config.build)
-        .pipe($.rsync(config.rsyncOptions));
-});
 
 gulp.task('fonts', function() {
     log('Copying fonts');
@@ -193,7 +189,7 @@ gulp.task('cssfix', function() {
 });
 
 
-gulp.task('optimize', gulp.series('build', function() {
+gulp.task('optimize', gulp.series('build', 'cssfix', function() {
     log('Optimizing the js, css and html');
     var assets = $.useref.assets({searchPath: './'});
     var cssFilter = $.filter('**/*.css');
@@ -225,6 +221,11 @@ gulp.task('optimize', gulp.series('build', function() {
         .pipe($.rev.manifest())
         .pipe(gulp.dest(config.build))
         ;
+}));
+
+gulp.task('rsync', gulp.series('optimize', function() {
+    return gulp.src(config.build)
+        .pipe($.rsync(config.rsyncOptions));
 }));
 
 gulp.task('serve-dev', gulp.series('build', 'cssfix', function() {
