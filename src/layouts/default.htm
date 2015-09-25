@@ -34,22 +34,22 @@ description = "Default layout"
 </head>
 <body>
 
-    <div id="header">
-      <div class="container" ng-include="'app/layout/header.html'"></div>
+  <div id="header">
+    <div ui-view="header" class="container"></div>
+  </div>
+  <div id="content">
+    <div ui-view="content" class="container" >
+      <div id="splash">
+        <div class="loading">
+          <i></i><i></i><i></i><i></i><i></i>
+        </div>
+      </div>
     </div>
-
-    <!-- Content -->
-    <div id="content">
-        <!-- Here is the main ui-view (unnamed) and will be populated by its immediate children's templates
-             unless otherwise explicitly named views are targeted. It's also employing ng-animate. -->
-        <div ui-view class="container faded" ></div>
-    </div>
-
-    <div id="footer">
-      <div class="container" ng-include="'app/layout/footer.html'"></div>
-    </div>
-
-    <div ui-view="modal" autoscroll="false"></div>
+  </div>
+  <div id="footer">
+    <div ui-view="footer" class="container"></div>
+  </div>
+  <div ui-view="modal" autoscroll="false"></div>
 
     <!-- build:js ../assets/js/lib.js -->
     <!-- bower:js -->

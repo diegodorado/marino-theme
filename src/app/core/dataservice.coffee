@@ -5,21 +5,38 @@ dataservice = ($http, $rootScope) ->
 
   promises = []
   @getData = (locale)->
-    locale or= $rootScope.locale
     if !promises[locale]
       promises[locale] = $http.get('/api/'+locale+'/all').then( (response) ->
-        $rootScope.countries = response.data.countries
-        $rootScope.dimensions = response.data.dimensions
-        $rootScope.$broadcast 'data-loaded'
-        return response.data
+        response.data
       )
 
     return promises[locale]
 
-  $rootScope.$on '$translateChangeStart', (event, data) =>
-    @getData(data.language).then( (responseData) ->
-      $rootScope.locale = data.language
-      document.documentElement.setAttribute('lang', data.language)
+  @prepareData = ->
+    locale = $rootScope.locale
+    unless promises[locale]?.$$state?.status is 1
+      @getData(locale).then( (data) ->
+        $rootScope.countries = data.countries
+        $rootScope.dimensions = data.dimensions
+        $rootScope.$broadcast 'data-loaded'
+      )
+
+  $rootScope.$on '$translateChangeStart', (event, eventData) =>
+    locale = eventData.language
+    if $rootScope.$stateParams.locale
+      $rootScope.$stateParams.locale = locale
+      #$rootScope.updateUrl()
+      $rootScope.$state.go($rootScope.$state.current, $rootScope.$stateParams, {notify: true})
+
+    #if $scope.$stateParams.locale = locale
+
+    @getData(locale).then( (data) ->
+      console.log eventData, data
+      $rootScope.locale = locale
+      document.documentElement.setAttribute('lang', locale)
+      $rootScope.countries = data.countries
+      $rootScope.dimensions = data.dimensions
+      $rootScope.$broadcast 'data-loaded'
     )
 
   return @

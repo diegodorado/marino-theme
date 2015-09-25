@@ -11,7 +11,7 @@ configure = ($compileProvider,
     routerHelperProvider.configure
       docTitle: 'CiberSeguridad: '
       resolveAlways: ready: (dataservice) ->
-        dataservice.getData()
+        dataservice.prepareData()
 
     return
 

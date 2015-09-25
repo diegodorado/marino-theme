@@ -85,8 +85,10 @@ getStates = ->
       state: 'app.institutional-information'
       config:
         url: ':locale/institutional-information'
-        templateUrl: ($stateParams) ->
-          return '/institutional-information-' + $stateParams.locale + '.html'
+        views:
+          "content@":
+            templateUrl: ($stateParams) ->
+              return '/institutional-information-' + $stateParams.locale + '.html'
         title: 'institutional-information'
     }
 
