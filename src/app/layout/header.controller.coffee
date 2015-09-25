@@ -1,14 +1,13 @@
 ### @ngInject ###
 Header = ($window, $scope , $translate) ->
-  vm = this
-  @langOpened = false
+  $scope.langOpened = false
 
-  @changeLocale = (locale) ->
+  $scope.changeLocale = (locale) ->
     $translate.use(locale)
-    @toggleMenu()
+    $scope.toggleMenu()
 
-  @toggleMenu = (event) ->
-    @langOpened = not @langOpened
+  $scope.toggleMenu = (event) ->
+    $scope.langOpened = not $scope.langOpened
     # Important part in the implementation
     # Stopping event propagation means window.onclick
     # won't get called when someone clicks
@@ -17,8 +16,8 @@ Header = ($window, $scope , $translate) ->
       event.stopPropagation()
 
   $window.onclick = () ->
-    if vm.langOpened
-      vm.langOpened = false
+    if $scope.langOpened
+      $scope.langOpened = false
       # You should let angular know about the update that you have made,
       # so that it can refresh the UI
       $scope.$apply()

@@ -31,27 +31,26 @@
 
 </head>
 <body>
-    
     <div id="header">
-      <div class="container" ng-include="'app/layout/header.html'"></div>
+      <div ui-view="header" class="container"></div>
     </div>
-
-    <!-- Content -->
     <div id="content">
-        <!-- Here is the main ui-view (unnamed) and will be populated by its immediate children's templates
-             unless otherwise explicitly named views are targeted. It's also employing ng-animate. -->
-        <div ui-view class="container faded" ></div>
+      <div ui-view="content" class="container" >
+        <div id="splash">
+          <div class="loading">
+            <i></i><i></i><i></i><i></i><i></i>
+          </div>
+        </div>
+      </div>
     </div>
-
     <div id="footer">
-      <div class="container" ng-include="'app/layout/footer.html'"></div>
+      <div ui-view="footer" class="container"></div>
     </div>
-
     <div ui-view="modal" autoscroll="false"></div>
 
     <!-- build:js ../assets/js/lib.js -->
-    <!-- bower:js -->
     <script src="/bower_components/jquery/dist/jquery.js"></script>
+    <!-- bower:js -->
     <script src="/bower_components/angular/angular.js"></script>
     <script src="/bower_components/angular-animate/angular-animate.js"></script>
     <script src="/bower_components/angular-clickout/angular-clickout.js"></script>

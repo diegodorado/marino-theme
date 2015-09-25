@@ -27,6 +27,7 @@
 
 <div class="info" ng-if="$stateParams.last_selected">
   <h3>{{last_selected().name}}</h3>
+  <b class="flag-{{$stateParams.last_selected}}"></b>
   <p>
     {{last_selected().excerpt}}
     <br/>

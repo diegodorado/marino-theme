@@ -1,15 +1,15 @@
-Footer = ($state, $window) ->
-  vm = this
+Footer = ($scope, $anchorScroll) ->
 
-  @year = (new Date()).getFullYear()
+  $scope.year = (new Date()).getFullYear()
 
-  @goToTop = ->
-    event.stopPropagation()
+  $scope.goToTop = ($event) ->
+    $event.stopPropagation()
+    $anchorScroll()
 
   return
 
 angular.module('app.layout').controller 'Footer', Footer
 Footer.$inject = [
-  '$state'
-  '$window'
+  '$scope'
+  '$anchorScroll'
 ]

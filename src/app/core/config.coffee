@@ -10,6 +10,8 @@ configure = ($compileProvider,
 
     routerHelperProvider.configure
       docTitle: 'CiberSeguridad: '
+      resolveAlways: ready: (dataservice) ->
+        dataservice.getData()
 
     return
 
@@ -49,10 +51,9 @@ core.run [
   '$rootScope'
   '$state'
   '$stateParams'
-  'dataservice'
   '$translate'
   '$window'
-  ($rootScope, $state, $stateParams, dataservice, $translate, $window) ->
+  ($rootScope, $state, $stateParams, $translate, $window) ->
     # It's very handy to add references to $state and $stateParams to the
     # $rootScope so that you can access them from any scope within your
     # applications. For example, <li ng-class="{ active: $state.includes
@@ -61,23 +62,8 @@ core.run [
     $rootScope.$state = $state
     $rootScope.$stateParams = $stateParams
 
-    $rootScope.countries = []
-    $rootScope.dimensions = []
-    $rootScope.locale = $translate.proposedLanguage()
     $translate.use($translate.proposedLanguage())
-
-    refreshData = (locale)->
-      locale or= $translate.use() or $translate.proposedLanguage()
-      $rootScope.locale = locale
-      document.documentElement.setAttribute('lang', locale)
-      dataservice.getData(locale).then (response) ->
-        $rootScope.countries = response.data.countries
-        $rootScope.dimensions = response.data.dimensions
-        $rootScope.$broadcast 'data-loaded'
-
-
-    $rootScope.$on '$translateChangeStart', (event, data) ->
-      refreshData(data.language)
+    $rootScope.locale = $translate.use() or $translate.proposedLanguage()
 
     $rootScope.breakpoint = null
 
@@ -95,10 +81,6 @@ core.run [
 
     $rootScope.updateUrl = ->
       $state.go($state.current, $stateParams, {notify: false})
-
-
-
-    refreshData()
 
 
 ]

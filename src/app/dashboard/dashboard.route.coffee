@@ -2,15 +2,24 @@ getStates = ->
   [
     #exists only to be redirected
     {
-      state: 'root'
+      state: 'app'
+      abstract: true
       config:
         url: '/'
+        views:
+          "header":
+            templateUrl: 'app/layout/header.html'
+            controller: 'Header'
+          "footer":
+            templateUrl: 'app/layout/footer.html'
+            controller: 'Footer'
+
     }
 
     {
-      state: 'graph'
+      state: 'app.graph'
       config:
-        url: '/graph/zone/:zone/countries/:countries/selected/:last_selected/:offset/dimensions/:expanded_dimensions'
+        url: 'graph/zone/:zone/countries/:countries/selected/:last_selected/:offset/dimensions/:expanded_dimensions'
         params:
           zone:
             value: '2'
@@ -29,49 +38,53 @@ getStates = ->
             squash: false
         title: 'Home'
         views:
-          "":
+          "content@":
             templateUrl: 'app/dashboard/dashboard.html'
             controller: 'Dashboard'
-          "aside@graph":
+          "aside@app.graph":
             templateUrl: 'app/dashboard/aside.html'
             controller: 'Aside'
-          "eq@graph":
+          "eq@app.graph":
             templateUrl: 'app/dashboard/eq.html'
             controller: 'Eq'
-          "map@graph":
+          "map@app.graph":
             templateUrl: 'app/dashboard/map.html'
             controller: 'MapCtrl'
             controllerAs: 'vm'
-          "graph@graph":
+          "graph@app.graph":
             templateUrl: 'app/dashboard/graph.html'
             controller: 'Graph'
-          "stats@graph":
+          "stats@app.graph":
             templateUrl: 'app/dashboard/stats.html'
             controller: 'Stats'
     }
 
     {
-      state: 'about'
+      state: 'app.about'
       config:
-        url: '/:locale/about'
-        templateUrl: ($stateParams) ->
-          return '/about-' + $stateParams.locale + '.html'
+        url: ':locale/about'
+        views:
+          "content@":
+            templateUrl:  ($stateParams) ->
+              return '/about-' + $stateParams.locale + '.html'
         title: 'about'
     }
 
     {
-      state: 'contributors'
+      state: 'app.contributors'
       config:
-        url: '/:locale/contributors'
-        templateUrl: ($stateParams) ->
-          return '/contributors-' + $stateParams.locale + '.html'
+        url: ':locale/contributors'
+        views:
+          "content@":
+            templateUrl: ($stateParams) ->
+              return '/contributors-' + $stateParams.locale + '.html'
         title: 'contributors'
     }
 
     {
-      state: 'institutional-information'
+      state: 'app.institutional-information'
       config:
-        url: '/:locale/institutional-information'
+        url: ':locale/institutional-information'
         templateUrl: ($stateParams) ->
           return '/institutional-information-' + $stateParams.locale + '.html'
         title: 'institutional-information'

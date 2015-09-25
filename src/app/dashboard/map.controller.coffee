@@ -70,10 +70,10 @@ MapCtrl = ($scope) ->
     options:
       colorAxis:
         values: [0,1,2]
-        colors: ['#f0f0f0','#ddd','#cacaca']
+        colors: ['#D4D5D6','#A7A9AB','#58585B']
       backgroundColor: 'transparent'
       datalessRegionColor: 'transparent'
-      defaultColor: '#f5f5f5'
+      defaultColor: '#D4D5D6'
       displayMode: 'regions'
       region: '019'
       legend: 'none'

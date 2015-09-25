@@ -1,7 +1,7 @@
-<header ng-controller="Header as vm">
+<header>
 
   <h1 class="isologo">
-    <a ui-sref="graph">
+    <a ui-sref="app.graph">
       <span translate>observatorio.de.la</span>
       <strong translate>ciberseguridad</strong>
       <span translate>en.america.latina.y.el.caribe</span>
@@ -9,16 +9,16 @@
   </h1>
 
   <nav class="lang">
-    <a ng-click="vm.toggleMenu($event)">
+    <a ng-click="toggleMenu($event)">
       <span class="sm">{{locale==='en' ? 'eng' : 'esp'}}</span>
       <span class="md">{{locale==='en' ? 'english' : 'español'}}</span>
     </a>
-    <ul ng-show="vm.langOpened">
+    <ul ng-show="langOpened">
       <li>
-        <a ng-class="{active: locale=='en'}" ng-click="vm.changeLocale('en')" translate>english</a>
+        <a ng-class="{active: locale=='en'}" ng-click="changeLocale('en')" translate>english</a>
       </li>
       <li>
-        <a ng-class="{active: locale=='es'}" ng-click="vm.changeLocale('es')" translate>espanol</a>
+        <a ng-class="{active: locale=='es'}" ng-click="changeLocale('es')" translate>espanol</a>
       </li>
     </ul>
   </nav>
