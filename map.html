@@ -8,8 +8,8 @@
 </style>
 </head>
 <body>
-<script src="http://d3js.org/d3.v3.min.js"></script>
-<script src="http://d3js.org/topojson.v1.min.js"></script>
+<script src="/bower_components/d3/d3.js"></script>
+<script src="/bower_components/topojson/topojson.js"></script>
 <script type="text/javascript">
 
 
@@ -30,11 +30,16 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("uk.json", function(error, uk) {
+
+d3.json("c.json", function(error2, ar) {
+  console.log(ar);
   svg.append("path")
-      .datum(topojson.feature(uk, uk.objects.subunits))
+      .datum(topojson.feature(ar, ar.objects.countries))
       .attr("d", path);
 });
+
+
+
 
 
 </script>

@@ -228,6 +228,10 @@ gulp.task('rsync', gulp.series('optimize', function() {
         .pipe($.rsync(config.rsyncOptions));
 }));
 
+
+//ogr2ogr -f GeoJSON   -where "ADM0_A3 IN ('GBR', 'IRL')" subunits.json   ne_10m_admin_0_map_subunits.shp
+
+
 gulp.task('serve-dev', gulp.series('build', 'cssfix', function() {
   startBrowserSync(true, false);
 }));
