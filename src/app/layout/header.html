@@ -1,31 +1,20 @@
-<header>
-
-  <h1 class="isologo">
-    <a ui-sref="app.graph">
-      <span translate>observatorio.de.la</span>
-      <strong translate>ciberseguridad</strong>
-      <span translate>en.america.latina.y.el.caribe</span>
-    </a>
-  </h1>
-
-  <nav class="lang">
-    <a ng-click="toggleMenu($event)">
-      <span class="sm">{{locale==='en' ? 'eng' : 'esp'}}</span>
-      <span class="md">{{locale==='en' ? 'english' : 'español'}}</span>
-    </a>
-    <ul ng-show="langOpened">
-      <li>
-        <a ng-class="{active: locale=='en'}" ng-click="changeLocale('en')" translate>english</a>
-      </li>
-      <li>
-        <a ng-class="{active: locale=='es'}" ng-click="changeLocale('es')" translate>espanol</a>
-      </li>
-    </ul>
-  </nav>
-
-  <nav class="partners">
-    <a class="oea">OAE</a>
-    <a class="bid">BID</a>
-  </nav>
-
-</header>
+<div class="navbar-header">
+  <button class="navbar-toggle" data-target=".navbar-collapse" data-toggle="collapse" type="button">
+    <span class="sr-only">Toggle navigation</span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+    <span class="icon-bar"></span>
+  </button>
+  <a class="navbar-brand" href="/">Marino Intranet</a>
+  <div class="navbar-brand">
+    currentcompany.name
+  </div>
+</div>
+<ul class="nav navbar-top-links navbar-right">
+  <li>
+    <a href="#"> Ingresar</a>
+  </li>
+  <li>
+    <a href="#"> Registrarse</a>
+  </li>
+</ul>

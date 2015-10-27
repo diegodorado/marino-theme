@@ -1,7 +1,5 @@
 angular.module 'app', [
     'app.core'
-    'app.dashboard'
-    'app.map'
+    'app.index'
     'app.layout'
-    'app.overlays'
 ]

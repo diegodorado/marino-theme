@@ -118,13 +118,6 @@ gulp.task('clean-build', function(done) {
     clean(files, done);
 });
 
-gulp.task('lang', function() {
-  log('Copying lang');
-  return gulp
-    .src(config.src + 'lang/**')
-    .pipe(gulp.dest(config.build + 'assets/lang'))
-    ;
-});
 
 gulp.task('pages', function() {
   log('Copying pages');
@@ -145,7 +138,7 @@ gulp.task('partials', function() {
 gulp.task('meta', function() {
   log('Copying composer.json and theme.yaml');
   return gulp
-    .src([config.src + 'composer.json', config.src + 'theme.yaml'])
+    .src([config.src + 'theme.yaml'])
     .pipe(gulp.dest(config.build))
     ;
 });
@@ -161,7 +154,7 @@ gulp.task('layout', function() {
 gulp.task('build', gulp.series(
   'clean-build',
   gulp.parallel('pages', 'partials', 'meta', 'layout'),
-  gulp.parallel('lang', 'fonts', 'images'),
+  gulp.parallel('fonts', 'images'),
   'wiredep',
   'inject',
   function() {
@@ -229,9 +222,6 @@ gulp.task('rsync', gulp.series('optimize', function() {
 }));
 
 
-//ogr2ogr -f GeoJSON   -where "ADM0_A3 IN ('GBR', 'IRL')" subunits.json   ne_10m_admin_0_map_subunits.shp
-
-
 gulp.task('serve-dev', gulp.series('build', 'cssfix', function() {
   startBrowserSync(true, false);
 }));
@@ -259,14 +249,12 @@ gulp.task('bump', function() {
 
 });
 
+
 ////////////////
 
 function changeEvent(event) {
-  var srcPattern = new RegExp('/.*(?=/' + config.source + ')/');
-  log('File ' + event.path.replace(srcPattern, '') + ' ' + event.type);
-}
-
-function copyImages(isDev) {
+  //var srcPattern = new RegExp('/.*(?=/' + config.source + ')/');
+  //log('File ' + event.path.replace(srcPattern, '') + ' ' + event.type);
 }
 
 
@@ -327,7 +315,7 @@ function startBrowserSync(isDev, server) {
         }
       };
     }else{
-      options['proxy'] = 'ciberseguridad.dev';
+      options['proxy'] = 'agroapex.dev';
     }
 
 

@@ -1,11 +1,11 @@
 {
-  "name": "ciberseguridad",
+  "name": "agroapex-theme",
   "version": "0.0.0",
   "homepage": "https://github.com/diegodorado/ciberseguridad",
   "authors": [
     "Diego Dorado <diegodorado@gmail.com>"
   ],
-  "description": "Observatorio de la Ciberseguridad",
+  "description": "Agroapex Theme",
   "license": "MIT",
   "ignore": [
     "**/.*",
@@ -15,25 +15,22 @@
     "tests"
   ],
   "dependencies": {
-    "angular": "~1.4.3",
+    "angular": "~1.4.7",
     "angular-animate": "~1.4.3",
     "angular-clickout": "~1.0.2",
-    "angular-google-chart": "~0.0.11",
     "angular-sanitize": "~1.4.3",
-    "angular-tooltips": "~0.1.22",
-    "angular-translate": "~2.7.2",
-    "angular-translate-handler-log": "~2.7.2",
-    "angular-translate-loader-static-files": "~2.7.2",
-    "angular-translate-loader-url": "~2.7.2",
-    "angular-translate-storage-cookie": "~2.7.2",
-    "angular-translate-storage-local": "~2.7.2",
     "angular-ui-router": "~0.2.15",
-    "d3": "~3.5.6",
     "jquery": "~2.1.4",
     "ng-slide-down": "~0.4.2",
     "normalize.css": "~3.0.3",
     "susy": "~2.2.5",
-    "topojson": "~1.6.19"
+    "angular-resource": "~1.4.7",
+    "bootstrap-sass": "bootstrap-sass-official#~3.3.5",
+    "font-awesome": "fontawesome#~4.4.0",
+    "angular-input-modified": "~2.2.5",
+    "angular-bootstrap": "~0.13.4",
+    "ng-table": "~0.8.3",
+    "metisMenu": "~2.2.0"
   },
   "devDependencies": {
     "breakpoint-sass": "~2.6.1"

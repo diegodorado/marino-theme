@@ -1,0 +1,12 @@
+title = "about"
+url = "/"
+layout = "default"
+hidden = "0"
+
+==
+
+{% if user %}
+<p>Hello {{ user.name }}</p>
+{% else %}
+<p>Nobody is logged in</p>
+{% endif %}

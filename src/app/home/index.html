@@ -1,0 +1,85 @@
+<% unless user_signed_in? %>
+<p class="lead">Bienvenido</p>
+<p>
+  Debes ingresar o registrarte para continuar.
+</p>
+<br/>
+<br/>
+<div class="row">
+  <div class="col-lg-4">
+    <a class="btn btn-outline btn-primary btn-lg btn-block" href="<%= new_user_session_path %>">Ingresa aquí</a>
+    <br/>
+  </div>
+  <div class="col-lg-4">
+    <a class="btn btn-outline btn-primary btn-lg btn-block" href="<%= new_user_registration_path %>">Registrate</a>
+  </div>
+</div>
+<% else %>
+<% if !current_company %>
+<div class="row">
+  <div class="col-lg-6">
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        Empresa . . .
+      </div>
+      <div class="panel-body">
+        <% if @companies.count == 0 %>
+        <p>
+          Parece que aún no hay ninguna Empresa asociada a tu cuenta.
+        </p>
+        <% else %>
+        <div class="dropdown">
+          <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">
+            Seleccionar Empresa
+            <span class="caret"></span>
+          </button>
+          <ul aria-labelledby="dropdownMenu1" class="dropdown-menu" role="menu">
+            <% @companies.each do |company| %>
+            <li role="presentation">
+              <a href="<%= select_company_path(company) %>" role="menuitem" tabindex="-1">#{company.name}</a>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+<% else %>
+<div class="row">
+  <div class="col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        Empresa : #{current_company.name}
+      </div>
+      <div class="panel-body">
+        <div class="dropdown">
+          <button aria-expanded="true" class="btn btn-default dropdown-toggle" data-toggle="dropdown" id="dropdownMenu1" type="button">
+            Cambiar de Empresa
+            <span class="caret"></span>
+          </button>
+          <ul aria-labelledby="dropdownMenu1" class="dropdown-menu" role="menu">
+            <% @companies.each do |company| %>
+            <li role="presentation">
+              <a href="<%= select_company_path(company) %>" role="menuitem" tabindex="-1">#{company.name}</a>
+            </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-12">
+    <h3 class="page-header">Aplicaciones</h3>
+  </div>
+</div>
+<div class="row">
+  <div class="col-lg-4">
+    <a class="btn btn-outline btn-primary btn-lg btn-block" href="<%= crop_controls_summary_path %>">Control de Granos</a>
+  </div>
+</div>
+<% end %>
+<% end %>

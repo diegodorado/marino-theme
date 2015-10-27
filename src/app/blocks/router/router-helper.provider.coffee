@@ -8,7 +8,7 @@ routerHelperProvider = ($locationProvider, $stateProvider, $urlRouterProvider) -
     resolveAlways: {}
 
   ### @ngInject ###
-  RouterHelper = ($location, $rootScope, $state, logger) ->
+  RouterHelper = ($location, $rootScope, $state) ->
     handlingStateChangeError = false
     hasOtherwise = false
     stateCounts =
@@ -41,7 +41,7 @@ routerHelperProvider = ($locationProvider, $stateProvider, $urlRouterProvider) -
         stateCounts.errors++
         handlingStateChangeError = true
         msg = formatErrorMessage(error)
-        logger.warning msg, [ toState ]
+        console.log  msg, [ toState ]
         $location.path '/'
 
 
@@ -56,9 +56,7 @@ routerHelperProvider = ($locationProvider, $stateProvider, $urlRouterProvider) -
 
     setupInitialUrl = ->
       $rootScope.$on '$stateChangeStart', (event, toState, toParams, fromState, fromParams) ->
-        if toState.name is 'app'
-          event.preventDefault()
-          $state.go('app.graph')
+        console.log   toState.name
 
     updateDocTitle = ->
       $rootScope.$on '$stateChangeSuccess', (event, toState, toParams, fromState, fromParams) ->
@@ -86,7 +84,6 @@ routerHelperProvider = ($locationProvider, $stateProvider, $urlRouterProvider) -
     '$location'
     '$rootScope'
     '$state'
-    'logger'
   ]
   return
 

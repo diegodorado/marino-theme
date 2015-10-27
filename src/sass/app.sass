@@ -1,107 +1,91 @@
 @import "susy/sass/susy"
 @import "breakpoint-sass/stylesheets/breakpoint"
 @import "compass"
-@import "partials/susy"
-@import "partials/mixins"
+//@import "partials/susy"
 
-@import "partials/sprites"
-@import "partials/fonts"
-@import "partials/colors"
-@import "partials/shared"
-@import "partials/header"
-@import "partials/footer"
-@import "partials/modal"
-@import "sections/overlay"
-@import "sections/contact"
-@import "sections/maturity-levels"
-@import "sections/country-details"
-@import "sections/main"
-@import "sections/graph"
-@import "sections/stats"
-
-+retina-sprites($retina-groups)
-
-html
-  overflow-y: scroll
+//@import "morris"
 
 
-i
-  display: inline-block
+@import "bootstrap-sass/assets/stylesheets/bootstrap"
+@import "font-awesome/scss/font-awesome"
+
+@import "./jasny-bootstrap"
+//@import "./jquery-ui"
+@import "./sb-admin-2"
+
+
+*
+  outline: none !important
+
 a
   cursor: pointer
-*
-  outline: none
 
-b[class^="flag"]
-  display: block
+.crop-price, .marketing_cost
+  padding: 0 !important
+  input
+    border: none
+    box-shadow: none
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button
+      /* display: none - Crashes Chrome on hover */
+      -webkit-appearance: none
+      /* Apparently some margin are still there even though it's hidden */
+      margin: 0
 
-#content
-  background: $grey_midder
+[ng\:cloak], [ng-cloak], .ng-cloak
+  display: none !important
 
-#header .container, #footer .container, section.main, section.stats .stats-inner
-  +container($small 2)
-  +breakpoint($medium)
-    +container($medium 4)
-  +breakpoint($large)
-    +container($large 9)
-  +breakpoint($wide)
-    +container($wide 9)
+.ng-invalid
+  border: 1px solid red !important
+  outline-color: red
 
-section.static
-  background: $white
-  +container($small 2)
-  .left, .right
-    padding: 30px
-  +breakpoint($medium)
-    +container($medium 4)
-  +breakpoint($large)
-    +container($large 9)
-    padding: 40px 0
-    .left, .right
-      padding: 0px
-    .left
-      float: left
-      width: 44%
-      margin-left: 50px
-    .right
-      float: right
-      width: 38%
-      margin-right: 50px
-  +breakpoint($wide)
-    +container($wide 9)
-    padding: 90px 0 40px
-    .left
-      width: 46%
-      margin-left: 70px
-    .right
-      margin-right: 70px
+.ng-valid.ng-dirty
+  border: 1px solid green !important
+  outline-color: green
 
-  img
-    width: 100%
+td.number.negative-balance
+  color: red
+  font-weight: bold
 
-  h3
-    margin: 0
-    font-size: 30px
-    line-height: 30px
-    padding: 6px 0
-    font-weight: normal
-    color: $black
-  p
-    margin: 0
-    font-size: 18px
-    line-height: 26px
-    padding: 0
-    color: $black
-    &.lead
-      color: $grey_dark
-      font-size: 20px
-      line-height: 30px
-      padding: 5px 0 30px
+td.number, input[type="number"]
+  text-align: right
 
-  h4
-    color: $black
-    padding: 20px 0px 8px
-    font-size: 20px
-    line-height: 30px
-    margin: 0
-    font-weight: bold
+.ng-table
+  border: 1px solid #ccc
+
+#ajax-indicator
+  position: fixed
+  left: 8px
+  top: 50px
+  +transition(opacity 0.4s)
+  +opacity(0)
+  &.on
+    +opacity(100)
+
+
+.ui-datepicker-trigger
+  margin: 3px
+  padding: 0
+  cursor: pointer
+
+#bootstrap_alerts
+  z-index: 1000
+  position: fixed
+  top: 0
+  padding: 10px
+  left: 25%
+  right: 25%
+
+label.btn.btn-outline.btn-primary
+  border-color: #204d74
+  background-color: #eeeeee
+  color: #999
+  box-shadow: none
+
+  &.active
+    color: white
+    background-color: #337ab7
+
+  &:hover
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.25)
+    text-decoration: underline
